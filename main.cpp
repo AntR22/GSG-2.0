@@ -9,21 +9,6 @@
 #include <boost/beast/core.hpp>
 #include <boost/beast/websocket.hpp>
 #include <iostream>
-/*
-std::string create_subscription_message() {
-    boost::property_tree::ptree message;
-    message.put("method", "SUBSCRIBE");
-
-    boost::property_tree::ptree params;
-    params.put("", "btcusdt@kline_1m");
-    message.add_child("params", params);
-    message.put("id", 1);
-
-    std::stringstream ss;
-    boost::property_tree::write_json(ss, message);
-    return ss.str();
-}
-*/
 
 std::string create_subscription_message() {
     boost::property_tree::ptree message;
@@ -44,7 +29,7 @@ std::string create_subscription_message() {
 
 int main() {
     try {
-// WebSocket endpoint
+        // WebSocket endpoint
         std::string host = "wss://data-stream.binance.com";
         std::string port = "9443";
 
