@@ -41,17 +41,20 @@ int main() {
         candlesticks.printCandlestick(candlesticks.accessDataAtIndex(0));
         // WebSocket endpoint
         std::string host = "wss://stream.binance.com";
-        std::string port = "9443";
+        std::string port = "443";
 
         // Create the I/O context
         boost::asio::io_context ioc;
-
+        
+        // Create the WebSocket stream
         boost::beast::websocket::stream<boost::asio::ip::tcp::socket> ws(ioc);
-        std::cout << "here" << std::endl;
 
-        boost::beast::error_code ec1;
-        boost::asio::connect(ws.next_layer(), boost::asio::ip::tcp::resolver(ioc).resolve(host, port,ec1));
-        std::cerr << "Error: " << ec1 << ", " << ec1.message() << std::endl;
+        // Resolve the hostname
+        boost::asio::ip::tcp::resolver resolver(ioc);
+        auto endpoints = resolver.resolve(host, port);
+
+        // Connect to the first endpoint in the list
+        boost::asio::connect(ws.next_layer(), endpoints);
 
         boost::beast::error_code ec;
         std::cout << "here1" << std::endl;
