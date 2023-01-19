@@ -29,8 +29,6 @@ using tcp = boost::asio::ip::tcp;
 int main() {
     try {
         cData candlesticks(ONEMIN_ONEWEEK);
-        std::string s = "{\n  \"e\": \"kline\",\n  \"E\": 123456789,\n  \"s\": \"ETHUSDT\",\n  \"k\": {\n    \"t\": 123400000,\n    \"T\": 123460000,\n    \"s\": \"BNBBTC\",\n    \"i\": \"1m\",\n    \"f\": 100,\n    \"L\": 200,\n    \"o\": \"0.0010\",\n    \"c\": \"0.0020\",\n    \"h\": \"0.0025\",\n    \"l\": \"0.0015\",\n    \"v\": \"1000\",\n    \"n\": 100,\n    \"x\": false,\n    \"q\": \"1.0000\",\n    \"V\": \"500\",\n    \"Q\": \"0.500\",\n    \"B\": \"123456\"\n  }\n}";
-        candlesticks.addCandlestick(s);
        // candlesticks.printCandlestick(candlesticks.accessDataAtIndex(0));
         // WebSocket endpoint
         std::string host = "stream.binance.com";
@@ -96,6 +94,10 @@ int main() {
             if (message == "ping") {
                 buffer.consume(buffer.size());
                 ws.write(boost::asio::buffer("pong"));
+            } else if (message == "{\"result\":null,\"id\":1}") {
+
+            } else {
+                candlesticks.addCandlestick(message);
             }
         }
 
