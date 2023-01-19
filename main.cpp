@@ -19,22 +19,13 @@
 #define ONEMIN_ONEWEEK 10080
 #define ONESEC_ONEDAY 86400
 
+namespace json = boost::json;
+
 std::string create_subscription_message() {
-    boost::property_tree::ptree message;
-    message.put("method", "SUBSCRIBE");
-
-    std::vector<std::string> streams = {"btcusdt@kline_1m"};
-    boost::property_tree::ptree params;
-    for(auto& stream: streams)
-        params.push_back(std::make_pair("", boost::property_tree::ptree(stream)));
-
-    message.add_child("params", params);
-    unsigned int x{1};
-    message.put("id", x);
-
-    std::stringstream ss;
-    boost::property_tree::write_json(ss, message);
-    return ss.str();
+    std::ifstream file("details.json");
+    value message = parse(file);
+    std::string s = serialize(message);
+    return s;
 }
 
 namespace beast = boost::beast;         // from <boost/beast.hpp>
@@ -47,9 +38,9 @@ using tcp = boost::asio::ip::tcp;
 int main() {
     try {
         cData candlesticks(ONEMIN_ONEWEEK);
-        std::string s = "{\n  \"e\": \"kline\",\n  \"E\": 123456789,\n  \"s\": \"BNBBTC\",\n  \"k\": {\n    \"t\": 123400000,\n    \"T\": 123460000,\n    \"s\": \"BNBBTC\",\n    \"i\": \"1m\",\n    \"f\": 100,\n    \"L\": 200,\n    \"o\": \"0.0010\",\n    \"c\": \"0.0020\",\n    \"h\": \"0.0025\",\n    \"l\": \"0.0015\",\n    \"v\": \"1000\",\n    \"n\": 100,\n    \"x\": false,\n    \"q\": \"1.0000\",\n    \"V\": \"500\",\n    \"Q\": \"0.500\",\n    \"B\": \"123456\"\n  }\n}";
+        std::string s = "{\n  \"e\": \"kline\",\n  \"E\": 123456789,\n  \"s\": \"ETHUSDT\",\n  \"k\": {\n    \"t\": 123400000,\n    \"T\": 123460000,\n    \"s\": \"BNBBTC\",\n    \"i\": \"1m\",\n    \"f\": 100,\n    \"L\": 200,\n    \"o\": \"0.0010\",\n    \"c\": \"0.0020\",\n    \"h\": \"0.0025\",\n    \"l\": \"0.0015\",\n    \"v\": \"1000\",\n    \"n\": 100,\n    \"x\": false,\n    \"q\": \"1.0000\",\n    \"V\": \"500\",\n    \"Q\": \"0.500\",\n    \"B\": \"123456\"\n  }\n}";
         candlesticks.addCandlestick(s);
-        candlesticks.printCandlestick(candlesticks.accessDataAtIndex(0));
+       // candlesticks.printCandlestick(candlesticks.accessDataAtIndex(0));
         // WebSocket endpoint
         std::string host = "stream.binance.com";
         std::string port = "443";

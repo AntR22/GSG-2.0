@@ -1,0 +1,8 @@
+{
+        "method": "SUBSCRIBE",
+        "params": 
+        [
+        "ethusdt@kline_1m"
+        ],
+        "id": 1
+}
