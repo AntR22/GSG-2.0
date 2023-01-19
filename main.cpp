@@ -8,9 +8,12 @@
 #include <utility>
 #include <boost/beast/core.hpp>
 #include <boost/beast/websocket.hpp>
+#include <boost/beast/ssl.hpp>
+#include <boost/beast/websocket/ssl.hpp>
 #include <iostream>
 #include "JSONParser.hpp"
 #include "data.hpp"
+
 
 #define ONEHOUR_ONEMONTH 672
 #define ONEMIN_ONEWEEK 10080
@@ -26,12 +29,20 @@ std::string create_subscription_message() {
         params.push_back(std::make_pair("", boost::property_tree::ptree(stream)));
 
     message.add_child("params", params);
-    message.put("id", 1);
+    unsigned int x{1};
+    message.put("id", x);
 
     std::stringstream ss;
     boost::property_tree::write_json(ss, message);
     return ss.str();
 }
+
+namespace beast = boost::beast;         // from <boost/beast.hpp>
+namespace http = beast::http;           // from <boost/beast/http.hpp>
+namespace websocket = beast::websocket; // from <boost/beast/websocket.hpp>
+namespace net = boost::asio;            // from <boost/asio.hpp>
+namespace ssl = boost::asio::ssl;       // from <boost/asio/ssl.hpp>
+using tcp = boost::asio::ip::tcp; 
 
 int main() {
     try {
@@ -40,30 +51,48 @@ int main() {
         candlesticks.addCandlestick(s);
         candlesticks.printCandlestick(candlesticks.accessDataAtIndex(0));
         // WebSocket endpoint
-        std::string host = "wss://stream.binance.com";
+        std::string host = "stream.binance.com";
         std::string port = "443";
-
         // Create the I/O context
         boost::asio::io_context ioc;
-        
+
+        // Creates SSL context and holds certificate
+         ssl::context ctx{ssl::context::tlsv12_client};
+    
+        tcp::resolver resolver(ioc);
         // Create the WebSocket stream
-        boost::beast::websocket::stream<boost::asio::ip::tcp::socket> ws(ioc);
+        websocket::stream<beast::ssl_stream<tcp::socket>> ws{ioc, ctx};
 
         // Resolve the hostname
-        boost::asio::ip::tcp::resolver resolver(ioc);
         auto endpoints = resolver.resolve(host, port);
 
         // Connect to the first endpoint in the list
-        boost::asio::connect(ws.next_layer(), endpoints);
+        auto ep = net::connect(get_lowest_layer(ws), endpoints);
+        
+        if(! SSL_set_tlsext_host_name(ws.next_layer().native_handle(), host.c_str()))
+            throw beast::system_error(
+                beast::error_code(
+                    static_cast<int>(::ERR_get_error()),
+                    net::error::get_ssl_category()),
+                "Failed to set SNI Hostname");
+        host += ':' + std::to_string(ep.port());
+
+        ws.next_layer().handshake(ssl::stream_base::client);
+
+        ws.set_option(websocket::stream_base::decorator(
+            [](websocket::request_type& req)
+            {
+                req.set(http::field::user_agent,
+                    std::string(BOOST_BEAST_VERSION_STRING) +
+                        " websocket-client-coro");
+            }));
 
         boost::beast::error_code ec;
-        std::cout << "here1" << std::endl;
 
-        ws.handshake(host, "/ws/btcusdt@kline_1m", ec);
-        std::cout << "here2" << std::endl;
+        ws.handshake(host, "/ws/ethusdt@kline_5m", ec);
 
         if(ec) {
-            std::cerr << "Error: " << ec.message() << std::endl;
+            std::cerr << "Error with handshake: " << ec.message() << std::endl;
             return EXIT_FAILURE;
         }
         //subscription message
@@ -90,7 +119,7 @@ int main() {
     }
     catch (std::exception const& e)
     {
-        std::cerr << "Error: " << e.what() << std::endl;
+        std::cerr << "Error from try: " << e.what() << std::endl;
         return EXIT_FAILURE;
     }
     
