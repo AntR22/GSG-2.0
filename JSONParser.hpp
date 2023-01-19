@@ -93,4 +93,14 @@ inline candlestick createCandlestickObject (std::string s) {
     return c;
 }
 
+namespace json = boost::json;
+inline std::string create_subscription_message() {
+    json::value message = {
+        {"method", "SUBSCRIBE"},
+        {"params", {"ethusdt@kline_1m"}},
+        {"id", 1}
+    };
+    return serialize(message);
+}
+
 #endif

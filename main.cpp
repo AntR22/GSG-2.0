@@ -19,15 +19,6 @@
 #define ONEMIN_ONEWEEK 10080
 #define ONESEC_ONEDAY 86400
 
-namespace json = boost::json;
-
-std::string create_subscription_message() {
-    std::ifstream file("details.json");
-    value message = parse(file);
-    std::string s = serialize(message);
-    return s;
-}
-
 namespace beast = boost::beast;         // from <boost/beast.hpp>
 namespace http = beast::http;           // from <boost/beast/http.hpp>
 namespace websocket = beast::websocket; // from <boost/beast/websocket.hpp>
@@ -60,6 +51,7 @@ int main() {
         // Connect to the first endpoint in the list
         auto ep = net::connect(get_lowest_layer(ws), endpoints);
         
+        //Set SNI HostName
         if(! SSL_set_tlsext_host_name(ws.next_layer().native_handle(), host.c_str()))
             throw beast::system_error(
                 beast::error_code(
