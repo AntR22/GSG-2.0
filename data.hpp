@@ -20,7 +20,9 @@ class cData {
     }
     void addCandlestick(std::string s) {
         cp[startIndex] = createCandlestickObject(s);
-        startIndex++;
+        if (cp[startIndex].getClosed()) {
+            startIndex++;
+        }
         checkStartIndex();
     }
     void checkStartIndex () {
