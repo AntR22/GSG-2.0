@@ -70,7 +70,7 @@ int main() {
 
         boost::beast::error_code ec;
 
-        ws.handshake(host, "/ws/ethusdt@kline_5m", ec);
+        ws.handshake(host, "/ws/ethusdt@kline_1m", ec);
 
         if(ec) {
             std::cerr << "Error with handshake: " << ec.message() << std::endl;
