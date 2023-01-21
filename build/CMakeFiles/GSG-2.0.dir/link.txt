@@ -1,1 +1,0 @@
-/usr/bin/clang++ -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/websocket.dir/main.cpp.o -o websocket  /opt/homebrew/lib/libboost_system-mt.dylib /opt/local/lib/libssl.dylib /opt/local/lib/libcrypto.dylib /opt/local/lib/libssl.dylib /opt/local/lib/libcrypto.dylib 
