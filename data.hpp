@@ -1,3 +1,5 @@
+#ifndef DATA_HPP
+#define DATA_HPP
 #include <string>
 #include <iostream>
 #include <boost/assert.hpp>
@@ -8,7 +10,6 @@ class cData {
     int startIndex;
     candlestick *cp;
     int arraySize;
-
     public:
     cData (int size) {
         arraySize = size;
@@ -58,4 +59,23 @@ class cData {
         std::cout << "qV:" << c.getquoteVolume() << std::endl;
         std::cout << "closed:" << c.getClosed() << std::endl;
     }
+    void printAllData () {
+        for (int i = startIndex; i < arraySize; i++) {
+            printCandlestick(cp[i]);
+        }
+        for (int i = 0; i < startIndex; i++) {
+            printCandlestick(cp[i]);
+        }
+    }
+    bool dataComplete () {
+        return cp[arraySize - 1].getClosed();
+    }
+    bool allCandlesClosed () {
+        if (dataComplete()) {
+            return cp[startIndex].getClosed();
+        }
+        return false;
+    }
 };
+
+#endif

@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "websocket"
+			"path" : "GSG-2.0"
 		}
 	],
 	"backtrace" : 1,
@@ -123,7 +123,7 @@
 			]
 		}
 	],
-	"id" : "websocket::@6890427a1f51a3e7e1df",
+	"id" : "GSG-2.0::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -164,8 +164,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "websocket",
-	"nameOnDisk" : "websocket",
+	"name" : "GSG-2.0",
+	"nameOnDisk" : "GSG-2.0",
 	"paths" : 
 	{
 		"build" : ".",

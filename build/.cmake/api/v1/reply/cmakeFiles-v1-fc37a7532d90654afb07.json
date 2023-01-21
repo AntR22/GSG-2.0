@@ -247,8 +247,13 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
+<<<<<<<< HEAD:build/.cmake/api/v1/reply/cmakeFiles-v1-fc37a7532d90654afb07.json
 		"build" : "/Users/sankalpatripathee/Documents/Web/Websocket/build",
 		"source" : "/Users/sankalpatripathee/Documents/Web/Websocket"
+========
+		"build" : "/Users/antonragusa/Desktop/Projects/GSG-2.0/build",
+		"source" : "/Users/antonragusa/Desktop/Projects/GSG-2.0"
+>>>>>>>> master:build/.cmake/api/v1/reply/cmakeFiles-v1-606773228502dab5e267.json
 	},
 	"version" : 
 	{

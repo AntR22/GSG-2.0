@@ -74,6 +74,16 @@ class candlestick{
 
 using namespace boost::json;
 
+inline std::string checkDataInterval (std::string s) {
+    error_code ec;
+    value const &objJS = parse(s, ec);
+    if (ec) {
+        std::cout << "Parse Failed:" << ec.message() << std::endl;
+    }
+    value const &obj = objJS.at("k");
+    return value_to<std::string>(obj.at("i"));
+}
+
 inline candlestick createCandlestickObject (std::string s) {
     error_code ec;
     value const &objJS = parse(s, ec);

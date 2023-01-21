@@ -95,7 +95,11 @@
 				}
 			],
 			"type" : "INTERNAL",
+<<<<<<<< HEAD:build/.cmake/api/v1/reply/cache-v2-b20ea5548f4e25ee9c5d.json
 			"value" : "/Users/sankalpatripathee/Documents/Web/Websocket/build"
+========
+			"value" : "/Users/antonragusa/Desktop/Projects/GSG-2.0/build"
+>>>>>>>> master:build/.cmake/api/v1/reply/cache-v2-fb659ae2a490a3a08461.json
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -531,7 +535,11 @@
 				}
 			],
 			"type" : "STATIC",
+<<<<<<<< HEAD:build/.cmake/api/v1/reply/cache-v2-b20ea5548f4e25ee9c5d.json
 			"value" : "/Users/sankalpatripathee/Documents/Web/Websocket/build/CMakeFiles/pkgRedirects"
+========
+			"value" : "/Users/antonragusa/Desktop/Projects/GSG-2.0/build/CMakeFiles/pkgRedirects"
+>>>>>>>> master:build/.cmake/api/v1/reply/cache-v2-fb659ae2a490a3a08461.json
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -591,7 +599,11 @@
 				}
 			],
 			"type" : "INTERNAL",
+<<<<<<<< HEAD:build/.cmake/api/v1/reply/cache-v2-b20ea5548f4e25ee9c5d.json
 			"value" : "/Users/sankalpatripathee/Documents/Web/Websocket"
+========
+			"value" : "/Users/antonragusa/Desktop/Projects/GSG-2.0"
+>>>>>>>> master:build/.cmake/api/v1/reply/cache-v2-fb659ae2a490a3a08461.json
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -875,7 +887,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "Websocket"
+			"value" : "GSG-2.0"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1182,6 +1194,42 @@
 			"value" : "[/opt/local/lib/libcrypto.dylib][/opt/local/include][c ][v3.0.7()]"
 		},
 		{
+			"name" : "GSG-2.0_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/Users/antonragusa/Desktop/Projects/GSG-2.0/build"
+		},
+		{
+			"name" : "GSG-2.0_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
+		},
+		{
+			"name" : "GSG-2.0_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/Users/antonragusa/Desktop/Projects/GSG-2.0"
+		},
+		{
 			"name" : "OPENSSL_CRYPTO_LIBRARY",
 			"properties" : 
 			[
@@ -1271,7 +1319,11 @@
 				}
 			],
 			"type" : "STATIC",
+<<<<<<<< HEAD:build/.cmake/api/v1/reply/cache-v2-b20ea5548f4e25ee9c5d.json
 			"value" : "/Users/sankalpatripathee/Documents/Web/Websocket/build"
+========
+			"value" : "/Users/antonragusa/Desktop/Projects/GSG-2.0/build"
+>>>>>>>> master:build/.cmake/api/v1/reply/cache-v2-fb659ae2a490a3a08461.json
 		},
 		{
 			"name" : "Websocket_IS_TOP_LEVEL",
@@ -1295,7 +1347,11 @@
 				}
 			],
 			"type" : "STATIC",
+<<<<<<<< HEAD:build/.cmake/api/v1/reply/cache-v2-b20ea5548f4e25ee9c5d.json
 			"value" : "/Users/sankalpatripathee/Documents/Web/Websocket"
+========
+			"value" : "/Users/antonragusa/Desktop/Projects/GSG-2.0"
+>>>>>>>> master:build/.cmake/api/v1/reply/cache-v2-fb659ae2a490a3a08461.json
 		},
 		{
 			"name" : "_OPENSSL_CFLAGS",
