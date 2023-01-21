@@ -95,7 +95,11 @@
 				}
 			],
 			"type" : "INTERNAL",
+<<<<<<<< HEAD:build/.cmake/api/v1/reply/cache-v2-b20ea5548f4e25ee9c5d.json
+			"value" : "/Users/sankalpatripathee/Documents/Web/Websocket/build"
+========
 			"value" : "/Users/antonragusa/Desktop/Projects/GSG-2.0/build"
+>>>>>>>> master:build/.cmake/api/v1/reply/cache-v2-fb659ae2a490a3a08461.json
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -132,6 +136,22 @@
 			],
 			"type" : "INTERNAL",
 			"value" : "1"
+		},
+		{
+			"name" : "CMAKE_COLOR_MAKEFILE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Enable/Disable color output during build."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "ON"
 		},
 		{
 			"name" : "CMAKE_COMMAND",
@@ -515,7 +535,11 @@
 				}
 			],
 			"type" : "STATIC",
+<<<<<<<< HEAD:build/.cmake/api/v1/reply/cache-v2-b20ea5548f4e25ee9c5d.json
+			"value" : "/Users/sankalpatripathee/Documents/Web/Websocket/build/CMakeFiles/pkgRedirects"
+========
 			"value" : "/Users/antonragusa/Desktop/Projects/GSG-2.0/build/CMakeFiles/pkgRedirects"
+>>>>>>>> master:build/.cmake/api/v1/reply/cache-v2-fb659ae2a490a3a08461.json
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -527,7 +551,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "Ninja"
+			"value" : "Unix Makefiles"
 		},
 		{
 			"name" : "CMAKE_GENERATOR_INSTANCE",
@@ -575,7 +599,11 @@
 				}
 			],
 			"type" : "INTERNAL",
+<<<<<<<< HEAD:build/.cmake/api/v1/reply/cache-v2-b20ea5548f4e25ee9c5d.json
+			"value" : "/Users/sankalpatripathee/Documents/Web/Websocket"
+========
 			"value" : "/Users/antonragusa/Desktop/Projects/GSG-2.0"
+>>>>>>>> master:build/.cmake/api/v1/reply/cache-v2-fb659ae2a490a3a08461.json
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -631,11 +659,11 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "Program used to build from build.ninja files."
+					"value" : "Path to a program."
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/opt/homebrew/bin/ninja"
+			"value" : "/usr/bin/make"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
@@ -799,7 +827,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : "13.0"
+			"value" : ""
 		},
 		{
 			"name" : "CMAKE_OSX_SYSROOT",
@@ -1163,7 +1191,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "[/opt/homebrew/opt/openssl@3/lib/libcrypto.dylib][/opt/homebrew/opt/openssl@3/include][c ][v3.0.7()]"
+			"value" : "[/opt/local/lib/libcrypto.dylib][/opt/local/include][c ][v3.0.7()]"
 		},
 		{
 			"name" : "GSG-2.0_BINARY_DIR",
@@ -1215,7 +1243,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/opt/homebrew/opt/openssl@3/lib/libcrypto.dylib"
+			"value" : "/opt/local/lib/libcrypto.dylib"
 		},
 		{
 			"name" : "OPENSSL_INCLUDE_DIR",
@@ -1231,7 +1259,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "/opt/homebrew/opt/openssl@3/include"
+			"value" : "/opt/local/include"
 		},
 		{
 			"name" : "OPENSSL_SSL_LIBRARY",
@@ -1247,7 +1275,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/opt/homebrew/opt/openssl/lib/libssl.dylib"
+			"value" : "/opt/local/lib/libssl.dylib"
 		},
 		{
 			"name" : "PKG_CONFIG_ARGN",
@@ -1279,7 +1307,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "PKG_CONFIG_EXECUTABLE-NOTFOUND"
+			"value" : "/opt/homebrew/bin/pkg-config"
 		},
 		{
 			"name" : "Websocket_BINARY_DIR",
@@ -1291,7 +1319,11 @@
 				}
 			],
 			"type" : "STATIC",
+<<<<<<<< HEAD:build/.cmake/api/v1/reply/cache-v2-b20ea5548f4e25ee9c5d.json
+			"value" : "/Users/sankalpatripathee/Documents/Web/Websocket/build"
+========
 			"value" : "/Users/antonragusa/Desktop/Projects/GSG-2.0/build"
+>>>>>>>> master:build/.cmake/api/v1/reply/cache-v2-fb659ae2a490a3a08461.json
 		},
 		{
 			"name" : "Websocket_IS_TOP_LEVEL",
@@ -1315,7 +1347,11 @@
 				}
 			],
 			"type" : "STATIC",
+<<<<<<<< HEAD:build/.cmake/api/v1/reply/cache-v2-b20ea5548f4e25ee9c5d.json
+			"value" : "/Users/sankalpatripathee/Documents/Web/Websocket"
+========
 			"value" : "/Users/antonragusa/Desktop/Projects/GSG-2.0"
+>>>>>>>> master:build/.cmake/api/v1/reply/cache-v2-fb659ae2a490a3a08461.json
 		},
 		{
 			"name" : "_OPENSSL_CFLAGS",
@@ -1559,6 +1595,54 @@
 		},
 		{
 			"name" : "_OPENSSL_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "_OPENSSL_openssl_INCLUDEDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "_OPENSSL_openssl_LIBDIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "_OPENSSL_openssl_PREFIX",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "_OPENSSL_openssl_VERSION",
 			"properties" : 
 			[
 				{

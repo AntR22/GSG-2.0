@@ -74,7 +74,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0"
+					"fragment" : "-g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk"
 				},
 				{
 					"backtrace" : 5,
@@ -105,7 +105,7 @@
 				{
 					"backtrace" : 7,
 					"isSystem" : true,
-					"path" : "/opt/homebrew/opt/openssl@3/include"
+					"path" : "/opt/local/include"
 				}
 			],
 			"language" : "CXX",
@@ -143,22 +143,22 @@
 			},
 			{
 				"backtrace" : 3,
-				"fragment" : "/opt/homebrew/opt/openssl/lib/libssl.dylib",
+				"fragment" : "/opt/local/lib/libssl.dylib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 3,
-				"fragment" : "/opt/homebrew/opt/openssl@3/lib/libcrypto.dylib",
+				"fragment" : "/opt/local/lib/libcrypto.dylib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 4,
-				"fragment" : "/opt/homebrew/opt/openssl/lib/libssl.dylib",
+				"fragment" : "/opt/local/lib/libssl.dylib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 4,
-				"fragment" : "/opt/homebrew/opt/openssl@3/lib/libcrypto.dylib",
+				"fragment" : "/opt/local/lib/libcrypto.dylib",
 				"role" : "libraries"
 			}
 		],
