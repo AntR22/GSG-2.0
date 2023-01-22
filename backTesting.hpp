@@ -1,5 +1,5 @@
 #include <chrono>
-#include <openssl/sha.h>
+#include "responseConstructor.hpp"
 
 namespace json = boost::json;
 inline int backTest () {
@@ -52,19 +52,20 @@ inline int backTest () {
             std::cerr << "Error with handshake: " << ec.message() << std::endl;
             return EXIT_FAILURE;
         }
-
-        const auto t1 = std::chrono::system_clock::now();
-        object params({
-            {"apiKey", apiKey}, 
-            {"signature", secretKey},
-            {"timestamp", std::chrono::duration_cast<std::chrono::milliseconds>(t1.time_since_epoch()).count()}
-        });
+        paramBuild params;
+        params.apiKey(apiKey);
+        params.side("BUY");
+        params.symbolTrade("ETHUSDT");
+        params.time();
+        params.type("MARKET");
+        params.quantity("1.1");
+        params.signature(secretKey);
         object accountInfo({
-            {"id", 1},
-            {"method", "account.status"},
-            {"params", params}
+            {"id", "1234"},
+            {"method", "order.place"},
+            {"params", params.objectComp()}
         });
-       //std::cout << message << std::endl;
+        std::cout << accountInfo << " it printed" << '\n' << std::endl;
         ws.write(boost::asio::buffer(serialize(accountInfo)));
         boost::beast::multi_buffer buffer;
         ws.read(buffer);
