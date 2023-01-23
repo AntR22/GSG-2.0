@@ -1,5 +1,6 @@
 #ifndef DATA_HPP
 #define DATA_HPP
+
 #include <string>
 #include <iostream>
 #include <boost/assert.hpp>
