@@ -52,7 +52,7 @@ build cmake_object_order_depends_target_GSG-2.0: phony || CMakeFiles/GSG-2.0.dir
 build CMakeFiles/GSG-2.0.dir/main.cpp.o: CXX_COMPILER__GSG-2.2e0_Debug /Users/antonragusa/Desktop/Projects/GSG-2.0/main.cpp || cmake_object_order_depends_target_GSG-2.0
   DEFINES = -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB
   DEP_FILE = CMakeFiles/GSG-2.0.dir/main.cpp.o.d
-  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -std=c++11 -Wno-deprecated -DBOOST_ALL_NO_LIB=ON -std=gnu++20
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -std=c++11 -Wno-deprecated -DBOOST_ALL_NO_LIB=ON -DBOOST_NO_DUPLICATE_DEFINITIONS -std=gnu++20
   INCLUDES = -isystem /opt/homebrew/include -isystem /opt/homebrew/Cellar/openssl@3/3.0.7/include
   OBJECT_DIR = CMakeFiles/GSG-2.0.dir
   OBJECT_FILE_DIR = CMakeFiles/GSG-2.0.dir
@@ -60,7 +60,7 @@ build CMakeFiles/GSG-2.0.dir/main.cpp.o: CXX_COMPILER__GSG-2.2e0_Debug /Users/an
 build CMakeFiles/GSG-2.0.dir/indicators.cpp.o: CXX_COMPILER__GSG-2.2e0_Debug /Users/antonragusa/Desktop/Projects/GSG-2.0/indicators.cpp || cmake_object_order_depends_target_GSG-2.0
   DEFINES = -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB
   DEP_FILE = CMakeFiles/GSG-2.0.dir/indicators.cpp.o.d
-  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -std=c++11 -Wno-deprecated -DBOOST_ALL_NO_LIB=ON -std=gnu++20
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -std=c++11 -Wno-deprecated -DBOOST_ALL_NO_LIB=ON -DBOOST_NO_DUPLICATE_DEFINITIONS -std=gnu++20
   INCLUDES = -isystem /opt/homebrew/include -isystem /opt/homebrew/Cellar/openssl@3/3.0.7/include
   OBJECT_DIR = CMakeFiles/GSG-2.0.dir
   OBJECT_FILE_DIR = CMakeFiles/GSG-2.0.dir
@@ -68,7 +68,7 @@ build CMakeFiles/GSG-2.0.dir/indicators.cpp.o: CXX_COMPILER__GSG-2.2e0_Debug /Us
 build CMakeFiles/GSG-2.0.dir/strategies.cpp.o: CXX_COMPILER__GSG-2.2e0_Debug /Users/antonragusa/Desktop/Projects/GSG-2.0/strategies.cpp || cmake_object_order_depends_target_GSG-2.0
   DEFINES = -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB
   DEP_FILE = CMakeFiles/GSG-2.0.dir/strategies.cpp.o.d
-  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -std=c++11 -Wno-deprecated -DBOOST_ALL_NO_LIB=ON -std=gnu++20
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -std=c++11 -Wno-deprecated -DBOOST_ALL_NO_LIB=ON -DBOOST_NO_DUPLICATE_DEFINITIONS -std=gnu++20
   INCLUDES = -isystem /opt/homebrew/include -isystem /opt/homebrew/Cellar/openssl@3/3.0.7/include
   OBJECT_DIR = CMakeFiles/GSG-2.0.dir
   OBJECT_FILE_DIR = CMakeFiles/GSG-2.0.dir
