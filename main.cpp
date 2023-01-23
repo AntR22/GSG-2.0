@@ -2,7 +2,7 @@
 #include "backTesting.hpp"
 
 int main(int argc, char **argv) {
-    bool testing = true;
+    bool testing = false;
     if (testing) {
         backTest();
     } else {
