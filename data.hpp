@@ -1,5 +1,4 @@
-#ifndef DATA_HPP
-#define DATA_HPP
+#pragma once
 
 #include <string>
 #include <iostream>
@@ -78,5 +77,3 @@ class cData {
         return false;
     }
 };
-
-#endif

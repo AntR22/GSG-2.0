@@ -1,8 +1,2 @@
-#ifndef INDICATORS_HPP
-#define INDICATORS_HPP
+#pragma once
 
-
-
-
-
-#endif

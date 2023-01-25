@@ -18,7 +18,7 @@ find_package(OpenSSL REQUIRED)
 include_directories(${OPENSSL_INCLUDE_DIR})
 
 # Add your source files here
-set(SOURCES main.cpp indicators.cpp strategies.cpp)
+set(SOURCES main.cpp)
 
 # Create the executable
 add_executable(GSG-2.0 ${SOURCES})

@@ -1,5 +1,4 @@
-#ifndef JSONPARSER_HPP
-#define JSONPARSER_HPP
+#pragma once
 
 #define BOOST_JSON_STACK_BUFFER_SIZE 1024
 #include <iostream>
@@ -112,5 +111,3 @@ inline std::string create_subscription_message() {
     };
     return serialize(message);
 }
-
-#endif
