@@ -2,7 +2,7 @@
 
 #include <string>
 #include <iostream>
-#include <boost/assert.hpp>
+#include <assert.h>
 #include "JSONParser.hpp"
 
 class cData {
@@ -38,7 +38,7 @@ class cData {
         return arraySize;
     }
     candlestick accessDataAtTime (int unitsTime) {
-        BOOST_ASSERT(unitsTime < arraySize);
+        assert(unitsTime < arraySize);
         int position = startIndex - unitsTime;
         if (position >= 0) {
             return cp[position];
@@ -47,7 +47,7 @@ class cData {
         }
     }
     candlestick accessDataAtIndex (int index) {
-        BOOST_ASSERT(index < arraySize);
+        assert(index < arraySize);
         return cp[index];
     }
     void printCandlestick (candlestick c) {
