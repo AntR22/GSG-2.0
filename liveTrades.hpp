@@ -20,6 +20,7 @@
 #define ONEHOUR_ONEMONTH 672
 #define ONEMIN_ONEWEEK 10080
 #define ONESEC_ONEDAY 86400
+#define ONEMIN_ONEHOUR 60
 
 namespace beast = boost::beast;         // from <boost/beast.hpp>
 namespace http = beast::http;           // from <boost/beast/http.hpp>
@@ -30,8 +31,7 @@ using tcp = boost::asio::ip::tcp;
 
 inline int marketStream() {
     try {
-        cData candlesticks(ONEMIN_ONEWEEK);
-       // candlesticks.printCandlestick(candlesticks.accessDataAtIndex(0));
+        cData candlesticks(ONEMIN_ONEHOUR);
         // WebSocket endpoint
         std::string host = "stream.binance.com";
         std::string port = "443";
@@ -93,10 +93,8 @@ inline int marketStream() {
                 break;
             }
             auto message = boost::beast::buffers_to_string(buffer.data());
-            if (message == "ping") {
-                buffer.consume(buffer.size());
-                ws.write(boost::asio::buffer("pong"));
-            } else if (message == "{\"result\":null,\"id\":1}") {
+            ws.pong("");
+            if (message == "{\"result\":null,\"id\":1}") {
 
             } else {
                 candlesticks.addCandlestick(message);
