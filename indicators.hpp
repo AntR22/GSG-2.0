@@ -39,16 +39,16 @@ inline double basicIndicators(std::string type, cData candlesticks, int period =
     } else if (type == "RSI") {
         double AG = 0;
         double AL = 0;
-        for (int i = 0; i < period; i++) {
-            if (candlesticks.accessDataAtTime(i).getclosePrice() >=
-                candlesticks.accessDataAtTime(i + 1).getclosePrice()) {
-                AG += (candlesticks.accessDataAtTime(i).getclosePrice() -
-                       candlesticks.accessDataAtTime(i + 1).getclosePrice()) / 
-                       candlesticks.accessDataAtTime(i).getclosePrice();
-            } else {
-                AL += ((candlesticks.accessDataAtTime(i + 1).getclosePrice() -
+        for (int i = 1; i < period; i++) {
+            if (candlesticks.accessDataAtTime(i - 1).getclosePrice() >=
+                candlesticks.accessDataAtTime(i).getclosePrice()) {
+                AG += (candlesticks.accessDataAtTime(i - 1).getclosePrice() -
                        candlesticks.accessDataAtTime(i).getclosePrice()) / 
-                       candlesticks.accessDataAtTime(i + 1).getclosePrice());
+                       candlesticks.accessDataAtTime(i - 1).getclosePrice();
+            } else {
+                AL += ((candlesticks.accessDataAtTime(i).getclosePrice() -
+                       candlesticks.accessDataAtTime(i - 1).getclosePrice()) / 
+                       candlesticks.accessDataAtTime(i).getclosePrice());
             }
         }
 

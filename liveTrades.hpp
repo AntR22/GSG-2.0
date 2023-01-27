@@ -93,7 +93,7 @@ inline int marketStream() {
                 break;
             }
             auto message = boost::beast::buffers_to_string(buffer.data());
-            ws.pong("");
+            ws.pong("pong");
             if (message == "{\"result\":null,\"id\":1}") {
 
             } else {
