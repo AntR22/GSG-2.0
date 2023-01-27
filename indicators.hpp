@@ -5,7 +5,9 @@
 #include <string>
 #include <iostream>
 
-inline basicIndicators(std::string type, cData candlesticks, int period = 0) {
+#define FAILURE -1
+
+inline double basicIndicators(std::string type, cData candlesticks, int period = 0) {
     if (period == 0 || period > candlesticks.returnSize()) {
         period = candlesticks.returnSize();
     }
@@ -52,7 +54,7 @@ inline basicIndicators(std::string type, cData candlesticks, int period = 0) {
 
         AG = AG / period;
         AL = AL / period;
-        if (AL = 0) {
+        if (AL == 0) {
             return 100;
         }
         double RS = (AG / AL);
@@ -61,5 +63,6 @@ inline basicIndicators(std::string type, cData candlesticks, int period = 0) {
 
     } else {
         std::cout << "Incorrect type, Usage:\n-SMA\n-RSI\n-VWAP" << std::endl;
+        return FAILURE;
     }
 }

@@ -14,6 +14,7 @@
 #include <iostream>
 #include "JSONParser.hpp"
 #include "data.hpp"
+#include "indicators.hpp"
 #include <stdexcept>
 
 
@@ -31,7 +32,7 @@ using tcp = boost::asio::ip::tcp;
 
 inline int marketStream() {
     try {
-        cData candlesticks(ONEMIN_ONEHOUR);
+        cData testing(ONEMIN_ONEHOUR);
         // WebSocket endpoint
         std::string host = "stream.binance.com";
         std::string port = "443";
@@ -88,7 +89,6 @@ inline int marketStream() {
         for (;;) {
             boost::beast::multi_buffer buffer;
             ws.read(buffer);
-            std::cout << boost::beast::make_printable(buffer.data()) << std::endl;
             if (buffer.size() == 0) {
                 break;
             }
@@ -97,7 +97,12 @@ inline int marketStream() {
             if (message == "{\"result\":null,\"id\":1}") {
 
             } else {
-                candlesticks.addCandlestick(message);
+                testing.addCandlestick(message);
+            }
+            if (testing.dataComplete()) {
+                std::cout << "RSI: " << basicIndicators("RSI", testing) << std::endl;
+                std::cout << "VWAP: " << basicIndicators("VWAP", testing) << std::endl;
+                std::cout << "SMA: " << basicIndicators("SMA", testing) << std::endl;
             }
         }
         return 0;
