@@ -7,11 +7,10 @@
 
 #define FAILURE -1
 
-inline double basicIndicators(std::string type, cData candlesticks, int period = 0) {
+inline double basicIndicators(std::string type, cData &candlesticks, int period = 0) {
     if (period == 0 || period > candlesticks.returnSize()) {
         period = candlesticks.returnSize();
     }
-
     if (type == "VWAP") {
         double sum = 0;
         double totalVolume = 0;
@@ -29,10 +28,10 @@ inline double basicIndicators(std::string type, cData candlesticks, int period =
     } else if (type == "SMA") {
         double sum = 0;
         for (int i = 0; i < period; i++) {
-            sum += candlesticks.accessDataAtTime(i).getopenPrice() +
+            sum += (candlesticks.accessDataAtTime(i).getopenPrice() +
                    candlesticks.accessDataAtTime(i).getclosePrice() +
                    candlesticks.accessDataAtTime(i).getpriceHigh() + 
-                   candlesticks.accessDataAtTime(i).getpriceLow() / 4;
+                   candlesticks.accessDataAtTime(i).getpriceLow()) / 4;
         }
         return sum / period;
 
