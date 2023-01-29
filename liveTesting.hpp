@@ -2,7 +2,7 @@
 #include "responseConstructor.hpp"
 
 namespace json = boost::json;
-inline int backTest () {
+inline int liveTest () {
         auto apiKey = "33d6fUXxSpFAeQDQ77yYMpx8Qhlop4zCj7k16En3uvkjKQnwM61EFbhUMkLcXkwr";
         auto secretKey = "Y1UBX9a38Gk38Zpx4eWigQReqahJKyIFGjpUzlqrv6PVZvPFKZGAxLSJQWnuJpB0";
         std::string host = "testnet.binance.vision";
@@ -52,24 +52,11 @@ inline int backTest () {
             std::cerr << "Error with handshake: " << ec.message() << std::endl;
             return EXIT_FAILURE;
         }
-        paramBuild params;
-        params.apiKey(apiKey);
-        //params.side("BUY");
-        //params.symbolTrade("ETHUSDT");
-        params.time();
-        //params.type("MARKET");
-        //params.quantity("1.1");
-        params.signature(secretKey);
-        object accountInfo({
-            {"id", "1234"},
-            {"method", "account.status"},
-            {"params", params.objectComp()}
-        });
-        std::cout << accountInfo << " it printed" << '\n' << std::endl;
-        ws.write(boost::asio::buffer(serialize(accountInfo)));
+       
+        ws.write(boost::asio::buffer(tradeRequestObj(apiKey, "BUY", "MARKET", "1.1", secretKey)));
         boost::beast::multi_buffer buffer;
         ws.read(buffer);
-        std::cout << boost::beast::make_printable(buffer.data()) << std::endl;
+        std::cout << boost::beast::make_printable(buffer.data()) << std::endl; 
         
     return EXIT_SUCCESS;
 }

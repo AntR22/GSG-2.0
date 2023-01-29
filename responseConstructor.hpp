@@ -2,6 +2,7 @@
 #include "signature.hpp"
 #include <map>
 
+
 namespace json = boost::json;
 class paramBuild {
         private:
@@ -59,3 +60,20 @@ class paramBuild {
                         return params;
                 }
 };
+
+inline std::string tradeRequestObj(std::string apiKey, std::string side, std::string type, std::string quantity, std::string secret) {
+        paramBuild params;
+        params.apiKey(apiKey);
+        params.side(side);
+        params.symbolTrade("ETHUSDT");
+        params.time();
+        params.type(type);
+        params.quantity(quantity);
+        params.signature(secret);
+        object trade({
+            {"id", std::to_string(rand())},
+            {"method", "order.place"},
+            {"params", params.objectComp()}
+        });
+        return serialize(trade);
+}       

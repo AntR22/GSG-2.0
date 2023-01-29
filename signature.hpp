@@ -12,7 +12,6 @@ inline std::string queryString(std::map<std::string, std::string> &parameters) {
                         urlQuery += '&' + it->first + '=' + it->second;
                 }
         }
-        std::cout << urlQuery << '\n' << std::endl;
         return urlQuery;
 }
 
