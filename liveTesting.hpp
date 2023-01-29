@@ -1,36 +1,8 @@
 #include <chrono>
 #include "responseConstructor.hpp"
-#include "data.hpp"
-#include <fstream>
-
-#define ONEHOUR_ONEMONTH 672
-#define ONEMIN_ONEWEEK 10080
-#define ONESEC_ONEDAY 86400
-
-inline std::string fillCandleStick(std::string line, std::string component) {
-    std::stringstream candle(line);
-    
-}
-
-inline void parseCSV() {
-    std::ifstream fin("../historicalData/14.01.23/ETHUSDT-1m-2023-01-14.csv");
-    std::string line;
-    std::string components;
-    cData newTest(ONEMIN_ONEWEEK);
-    while (getline(fin, line, '\n')) {
-        std::cout << line << std::endl;
-        std::stringstream candle(line);
-        newTest.addCandlestick(line);
-        while (getline(candle, components, ',')) {
-            std::cout << components << std::endl;
-        }
-        break;
-    }
-}
 
 namespace json = boost::json;
 inline int backTest () {
-        /*
         auto apiKey = "33d6fUXxSpFAeQDQ77yYMpx8Qhlop4zCj7k16En3uvkjKQnwM61EFbhUMkLcXkwr";
         auto secretKey = "Y1UBX9a38Gk38Zpx4eWigQReqahJKyIFGjpUzlqrv6PVZvPFKZGAxLSJQWnuJpB0";
         std::string host = "testnet.binance.vision";
@@ -80,27 +52,24 @@ inline int backTest () {
             std::cerr << "Error with handshake: " << ec.message() << std::endl;
             return EXIT_FAILURE;
         }
-        
         paramBuild params;
         params.apiKey(apiKey);
-        params.side("BUY");
-        params.symbolTrade("ETHUSDT");
+        //params.side("BUY");
+        //params.symbolTrade("ETHUSDT");
         params.time();
-        params.type("MARKET");
-        params.quantity("1.1");
+        //params.type("MARKET");
+        //params.quantity("1.1");
         params.signature(secretKey);
         object accountInfo({
             {"id", "1234"},
-            {"method", "order.place"},
+            {"method", "account.status"},
             {"params", params.objectComp()}
         });
         std::cout << accountInfo << " it printed" << '\n' << std::endl;
         ws.write(boost::asio::buffer(serialize(accountInfo)));
         boost::beast::multi_buffer buffer;
         ws.read(buffer);
-        std::cout << boost::beast::make_printable(buffer.data()) << std::endl; */
-        parseCSV();
+        std::cout << boost::beast::make_printable(buffer.data()) << std::endl;
         
     return EXIT_SUCCESS;
 }
-
