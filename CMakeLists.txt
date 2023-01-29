@@ -3,7 +3,7 @@ project(GSG-2.0)
 set(CMAKE_CXX_STANDARD 20)
 
 add_compile_options(-std=c++11)
-
+add_compile_options(-Wno-deprecated)
 # Find and include the Boost libraries
 find_package(Boost 1.74.0 REQUIRED COMPONENTS system)
 include_directories(${Boost_INCLUDE_DIRS})
