@@ -79,7 +79,12 @@
         "__locale": "cpp",
         "algorithm": "cpp",
         "utility": "cpp",
-        "*.ipp": "cpp"
+        "*.ipp": "cpp",
+        "__std_stream": "cpp",
+        "bit": "cpp",
+        "cfenv": "cpp",
+        "queue": "cpp",
+        "strstream": "cpp"
     },
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
 }

@@ -1,3 +1,5 @@
+#pragma once
+
 #include <chrono>
 #include "responseConstructor.hpp"
 #include "data.hpp"

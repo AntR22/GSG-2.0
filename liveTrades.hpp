@@ -1,3 +1,5 @@
+#pragma once
+
 #include <boost/asio/connect.hpp>
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/asio/ssl/stream.hpp>
@@ -10,14 +12,18 @@
 #include <boost/beast/ssl.hpp>
 #include <boost/beast/websocket/ssl.hpp>
 #include <iostream>
+#include <iomanip>
+#include <ctime>
 #include "JSONParser.hpp"
 #include "data.hpp"
+#include "indicators.hpp"
 #include <stdexcept>
 
 
 #define ONEHOUR_ONEMONTH 672
 #define ONEMIN_ONEWEEK 10080
 #define ONESEC_ONEDAY 86400
+#define ONEMIN_ONEHOUR 60
 
 namespace beast = boost::beast;         // from <boost/beast.hpp>
 namespace http = beast::http;           // from <boost/beast/http.hpp>
@@ -28,8 +34,10 @@ using tcp = boost::asio::ip::tcp;
 
 inline int marketStream() {
     try {
-        cData candlesticks(ONEMIN_ONEWEEK);
-       // candlesticks.printCandlestick(candlesticks.accessDataAtIndex(0));
+        std::time_t t = std::time(nullptr);
+        std::tm tm = *std::localtime(&t);
+
+        cData testing(ONEMIN_ONEHOUR);
         // WebSocket endpoint
         std::string host = "stream.binance.com";
         std::string port = "443";
@@ -37,7 +45,7 @@ inline int marketStream() {
         boost::asio::io_context ioc;
 
         // Creates SSL context and holds certificate
-         ssl::context ctx{ssl::context::tlsv12_client};
+        ssl::context ctx{ssl::context::tlsv12_client};
     
         tcp::resolver resolver(ioc);
         // Create the WebSocket stream
@@ -86,28 +94,35 @@ inline int marketStream() {
         for (;;) {
             boost::beast::multi_buffer buffer;
             ws.read(buffer);
-            std::cout << boost::beast::make_printable(buffer.data()) << std::endl;
             if (buffer.size() == 0) {
                 break;
             }
             auto message = boost::beast::buffers_to_string(buffer.data());
-            if (message == "ping") {
-                buffer.consume(buffer.size());
-                ws.write(boost::asio::buffer("pong"));
-            } else if (message == "{\"result\":null,\"id\":1}") {
-
+            ws.pong("pong");
+            if (message == "{\"result\":null,\"id\":1}") {
+                std::cout << "Start Time:\n" << std::put_time(&tm, "%c") << std::endl;
             } else {
-                candlesticks.addCandlestick(message);
+                testing.addCandlestick(message);
+            }
+            if (testing.allCandlesClosed()) {
+                std::cout << std::fixed;
+                std::cout << "RSI: " << basicIndicators("RSI", testing) << std::endl;
+                std::cout << "VWAP: " << basicIndicators("VWAP", testing) << std::endl;
+                std::cout << "SMA: " << basicIndicators("SMA", testing) << std::endl;
+                testing.printAllData(true);
             }
         }
+        std::cout << "End Time:\n" << std::put_time(&tm, "%c") << std::endl;
         return 0;
     }
     catch (std::exception const& e)
     {
-        std::cerr << "Error from try: " << e.what() << std::endl;
+        std::time_t t = std::time(nullptr);
+        std::tm tm = *std::localtime(&t);
+        std::cerr << "Stop Time:\n" << std::put_time(&tm, "%c") <<
+                    " Error from try: " << e.what() << std::endl;
         return EXIT_FAILURE;
     }
-    
 }
 
 
