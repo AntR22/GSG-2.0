@@ -4,6 +4,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_compile_options(-std=c++11)
 add_compile_options(-Wno-deprecated)
+
 # should disable automatic linking of boost libraries
 add_compile_options(-DBOOST_ALL_NO_LIB=ON)
 # not define certain symbols that are already defined 

@@ -2,9 +2,26 @@
 
 #include <chrono>
 #include "responseConstructor.hpp"
+#include "data.hpp"
+#include <fstream>
+
+inline void parseCSV() {
+    std::ifstream fin("../historicalData/14.01.23/ETHUSDT-1m-2023-01-14.csv");
+    std::string line;
+    std::string components;
+    while (getline(fin, line, '\n')) {
+        std::cout << line << std::endl;
+        std::stringstream candle(line);
+        while (getline(candle, components, ',')) {
+            std::cout << components << std::endl;
+        }
+        break;
+    }
+}
 
 namespace json = boost::json;
 inline int backTest () {
+        /*
         auto apiKey = "33d6fUXxSpFAeQDQ77yYMpx8Qhlop4zCj7k16En3uvkjKQnwM61EFbhUMkLcXkwr";
         auto secretKey = "Y1UBX9a38Gk38Zpx4eWigQReqahJKyIFGjpUzlqrv6PVZvPFKZGAxLSJQWnuJpB0";
         std::string host = "testnet.binance.vision";
@@ -54,6 +71,7 @@ inline int backTest () {
             std::cerr << "Error with handshake: " << ec.message() << std::endl;
             return EXIT_FAILURE;
         }
+        
         paramBuild params;
         params.apiKey(apiKey);
         params.side("BUY");
@@ -71,7 +89,9 @@ inline int backTest () {
         ws.write(boost::asio::buffer(serialize(accountInfo)));
         boost::beast::multi_buffer buffer;
         ws.read(buffer);
-        std::cout << boost::beast::make_printable(buffer.data()) << std::endl;
+        std::cout << boost::beast::make_printable(buffer.data()) << std::endl; */
+        parseCSV();
         
     return EXIT_SUCCESS;
 }
+
