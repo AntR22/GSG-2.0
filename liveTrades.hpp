@@ -12,6 +12,8 @@
 #include <boost/beast/ssl.hpp>
 #include <boost/beast/websocket/ssl.hpp>
 #include <iostream>
+#include <iomanip>
+#include <ctime>
 #include "JSONParser.hpp"
 #include "data.hpp"
 #include "indicators.hpp"
@@ -32,6 +34,9 @@ using tcp = boost::asio::ip::tcp;
 
 inline int marketStream() {
     try {
+        std::time_t t = std::time(nullptr);
+        std::tm tm = *std::localtime(&t);
+
         cData testing(ONEMIN_ONEHOUR);
         // WebSocket endpoint
         std::string host = "stream.binance.com";
@@ -40,7 +45,7 @@ inline int marketStream() {
         boost::asio::io_context ioc;
 
         // Creates SSL context and holds certificate
-         ssl::context ctx{ssl::context::tlsv12_client};
+        ssl::context ctx{ssl::context::tlsv12_client};
     
         tcp::resolver resolver(ioc);
         // Create the WebSocket stream
@@ -95,24 +100,29 @@ inline int marketStream() {
             auto message = boost::beast::buffers_to_string(buffer.data());
             ws.pong("pong");
             if (message == "{\"result\":null,\"id\":1}") {
-
+                std::cout << "Start Time:\n" << std::put_time(&tm, "%c") << std::endl;
             } else {
                 testing.addCandlestick(message);
             }
-            if (testing.dataComplete()) {
+            if (testing.allCandlesClosed()) {
+                std::cout << std::fixed;
                 std::cout << "RSI: " << basicIndicators("RSI", testing) << std::endl;
                 std::cout << "VWAP: " << basicIndicators("VWAP", testing) << std::endl;
                 std::cout << "SMA: " << basicIndicators("SMA", testing) << std::endl;
+                testing.printAllData(true);
             }
         }
+        std::cout << "End Time:\n" << std::put_time(&tm, "%c") << std::endl;
         return 0;
     }
     catch (std::exception const& e)
     {
-        std::cerr << "Error from try: " << e.what() << std::endl;
+        std::time_t t = std::time(nullptr);
+        std::tm tm = *std::localtime(&t);
+        std::cerr << "Stop Time:\n" << std::put_time(&tm, "%c") <<
+                    " Error from try: " << e.what() << std::endl;
         return EXIT_FAILURE;
     }
-    
 }
 
 
