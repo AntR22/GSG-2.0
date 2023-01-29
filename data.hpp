@@ -59,11 +59,17 @@ class cData {
         std::cout << "qV:" << c.getquoteVolume() << std::endl;
         std::cout << "closed:" << c.getClosed() << std::endl;
     }
-    void printAllData () {
+    void printAllData (bool includeIndex = false) {
         for (int i = startIndex; i < arraySize; i++) {
+            if (includeIndex) {
+                std::cout << "ID: " << i << std::endl;
+            }
             printCandlestick(cp[i]);
         }
         for (int i = 0; i < startIndex; i++) {
+            if (includeIndex) {
+                std::cout << "ID: " << i << std::endl;
+            }
             printCandlestick(cp[i]);
         }
     }
