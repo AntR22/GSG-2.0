@@ -1,8 +1,8 @@
-#ifndef DATA_HPP
-#define DATA_HPP
+#pragma once
+
 #include <string>
 #include <iostream>
-#include <boost/assert.hpp>
+#include <assert.h>
 #include "JSONParser.hpp"
 
 class cData {
@@ -43,7 +43,7 @@ class cData {
         return arraySize;
     }
     candlestick accessDataAtTime (int unitsTime) {
-        BOOST_ASSERT(unitsTime < arraySize);
+        assert(unitsTime < arraySize);
         int position = startIndex - unitsTime;
         if (position >= 0) {
             return cp[position];
@@ -52,7 +52,7 @@ class cData {
         }
     }
     candlestick accessDataAtIndex (int index) {
-        BOOST_ASSERT(index < arraySize);
+        assert(index < arraySize);
         return cp[index];
     }
     void printCandlestick (candlestick c) {
@@ -64,11 +64,17 @@ class cData {
         std::cout << "qV:" << c.getquoteVolume() << std::endl;
         std::cout << "closed:" << c.getClosed() << std::endl;
     }
-    void printAllData () {
+    void printAllData (bool includeIndex = false) {
         for (int i = startIndex; i < arraySize; i++) {
+            if (includeIndex) {
+                std::cout << "ID: " << i << std::endl;
+            }
             printCandlestick(cp[i]);
         }
         for (int i = 0; i < startIndex; i++) {
+            if (includeIndex) {
+                std::cout << "ID: " << i << std::endl;
+            }
             printCandlestick(cp[i]);
         }
     }
@@ -82,5 +88,3 @@ class cData {
         return false;
     }
 };
-
-#endif

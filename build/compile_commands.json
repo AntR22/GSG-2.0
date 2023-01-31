@@ -1,7 +1,7 @@
 [
 {
-  "directory": "/Users/sankalpatripathee/Documents/Web/GSG-2.0/build",
-  "command": "/usr/bin/clang++ -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -isystem /opt/homebrew/include -isystem /opt/local/include -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -std=c++11 -Wno-deprecated -std=gnu++20 -o CMakeFiles/GSG-2.0.dir/main.cpp.o -c /Users/sankalpatripathee/Documents/Web/GSG-2.0/main.cpp",
-  "file": "/Users/sankalpatripathee/Documents/Web/GSG-2.0/main.cpp"
+  "directory": "/Users/antonragusa/Desktop/Projects/GSG-2.0/build",
+  "command": "/usr/bin/clang++ -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -isystem /opt/homebrew/include -isystem /opt/homebrew/Cellar/openssl@3/3.0.7/include -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -std=c++11 -Wno-deprecated -DBOOST_ALL_NO_LIB=ON -DBOOST_NO_DUPLICATE_DEFINITIONS -std=gnu++20 -o CMakeFiles/GSG-2.0.dir/main.cpp.o -c /Users/antonragusa/Desktop/Projects/GSG-2.0/main.cpp",
+  "file": "/Users/antonragusa/Desktop/Projects/GSG-2.0/main.cpp"
 }
 ]

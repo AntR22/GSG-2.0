@@ -52,8 +52,8 @@ build cmake_object_order_depends_target_GSG-2.0: phony || CMakeFiles/GSG-2.0.dir
 build CMakeFiles/GSG-2.0.dir/main.cpp.o: CXX_COMPILER__GSG-2.2e0_Debug /Users/antonragusa/Desktop/Projects/GSG-2.0/main.cpp || cmake_object_order_depends_target_GSG-2.0
   DEFINES = -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB
   DEP_FILE = CMakeFiles/GSG-2.0.dir/main.cpp.o.d
-  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -std=c++11 -std=gnu++20
-  INCLUDES = -isystem /opt/homebrew/include -isystem /opt/homebrew/opt/openssl@3/include
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -std=c++11 -Wno-deprecated -DBOOST_ALL_NO_LIB=ON -DBOOST_NO_DUPLICATE_DEFINITIONS -std=gnu++20
+  INCLUDES = -isystem /opt/homebrew/include -isystem /opt/homebrew/Cellar/openssl@3/3.0.7/include
   OBJECT_DIR = CMakeFiles/GSG-2.0.dir
   OBJECT_FILE_DIR = CMakeFiles/GSG-2.0.dir
 
@@ -65,9 +65,9 @@ build CMakeFiles/GSG-2.0.dir/main.cpp.o: CXX_COMPILER__GSG-2.2e0_Debug /Users/an
 #############################################
 # Link the executable GSG-2.0
 
-build GSG-2.0: CXX_EXECUTABLE_LINKER__GSG-2.2e0_Debug CMakeFiles/GSG-2.0.dir/main.cpp.o | /opt/homebrew/lib/libboost_system-mt.dylib /opt/homebrew/opt/openssl/lib/libssl.dylib /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib /opt/homebrew/opt/openssl/lib/libssl.dylib /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
+build GSG-2.0: CXX_EXECUTABLE_LINKER__GSG-2.2e0_Debug CMakeFiles/GSG-2.0.dir/main.cpp.o | /opt/homebrew/lib/libboost_system-mt.dylib /opt/homebrew/Cellar/openssl@3/3.0.7/lib/libssl.dylib /opt/homebrew/Cellar/openssl@3/3.0.7/lib/libcrypto.dylib /opt/homebrew/Cellar/openssl@3/3.0.7/lib/libssl.dylib /opt/homebrew/Cellar/openssl@3/3.0.7/lib/libcrypto.dylib
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0
-  LINK_LIBRARIES = /opt/homebrew/lib/libboost_system-mt.dylib  /opt/homebrew/opt/openssl/lib/libssl.dylib  /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib  /opt/homebrew/opt/openssl/lib/libssl.dylib  /opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
+  LINK_LIBRARIES = /opt/homebrew/lib/libboost_system-mt.dylib  /opt/homebrew/Cellar/openssl@3/3.0.7/lib/libssl.dylib  /opt/homebrew/Cellar/openssl@3/3.0.7/lib/libcrypto.dylib  /opt/homebrew/Cellar/openssl@3/3.0.7/lib/libssl.dylib  /opt/homebrew/Cellar/openssl@3/3.0.7/lib/libcrypto.dylib
   OBJECT_DIR = CMakeFiles/GSG-2.0.dir
   POST_BUILD = :
   PRE_LINK = :

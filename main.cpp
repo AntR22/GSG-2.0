@@ -2,7 +2,7 @@
 #include "backTesting.hpp"
 #include "liveTesting.hpp"
 
-int main() {
+int main(int argc, char **argv) {
     bool testing = true;
     if (testing) {
         liveTest();

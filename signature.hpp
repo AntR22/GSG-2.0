@@ -1,3 +1,5 @@
+#pragma once
+
 #include <openssl/hmac.h>
 #include <unordered_map>
 #include <cstdio>

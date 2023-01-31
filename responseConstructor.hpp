@@ -1,3 +1,5 @@
+#pragma once
+
 #include <boost/json/src.hpp>
 #include "signature.hpp"
 #include <map>

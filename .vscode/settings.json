@@ -80,7 +80,12 @@
         "algorithm": "cpp",
         "utility": "cpp",
         "*.ipp": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "__std_stream": "cpp",
+        "bit": "cpp",
+        "cfenv": "cpp",
+        "queue": "cpp",
+        "strstream": "cpp"
     },
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
 }
