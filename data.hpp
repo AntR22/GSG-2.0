@@ -3,6 +3,8 @@
 #include <string>
 #include <iostream>
 #include <assert.h>
+#include <map>
+#include <queue>
 #include "JSONParser.hpp"
 
 class cData {
@@ -83,3 +85,40 @@ class cData {
         return false;
     }
 };
+
+class volumeData {
+    private:
+        double totalVolume;
+        std::queue<tradeData> trades;
+        int frontDataTime;
+    public:
+
+};
+
+class volumeProfile {
+    private:
+        double precision;
+
+        double center;
+        double sd1U;
+        double sd1L;
+        double highVolNode;
+
+        std::map<double, volumeData> profile;
+
+    public:
+
+
+};
+
+// not finished
+class timeProfile {
+    private:
+        int range;
+        
+        int POC; // point of control
+
+    public:
+
+};
+
