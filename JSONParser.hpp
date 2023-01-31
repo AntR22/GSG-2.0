@@ -71,7 +71,56 @@ class candlestick{
         }
 };
 
+class tradeData {
+    private:
+        double price;
+        double volume;
+        int time;
+
+    public:
+        tradeData (double p, double v, int t) {
+            price = p;
+            volume = v;
+            time = t;
+        };
+
+        void setPrice (double p) {
+            price = p;
+        }
+        void setVolume (double v) {
+            volume = v;
+        }
+        void setTime (int t) {
+            time = t;
+        }
+        double getPrice () {
+            return price;
+        }
+        double getVolume () {
+            return volume;
+        }
+        double getTime () {
+            return time;
+        }
+};
+
 using namespace boost::json;
+
+inline tradeData setTradeData (std::string s) {
+    error_code ec;
+    value const &obj = parse(s, ec);
+    if (ec) {
+        std::cout << "Parse Failed:" << ec.message() << std::endl;
+    }
+
+    double price = std::stod(value_to<std::string>(obj.at("p")));
+    double vol = std::stod(value_to<std::string>(obj.at("q")));
+    int time = value_to<int>(obj.at("T"));
+
+    tradeData tD(price, vol, time);
+
+    return tD;
+}
 
 inline std::string checkDataInterval (std::string s) {
     error_code ec;
