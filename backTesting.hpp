@@ -1,97 +1,71 @@
 #pragma once
 
 #include <chrono>
-#include "responseConstructor.hpp"
 #include "data.hpp"
 #include <fstream>
+#include <filesystem>
 
-inline void parseCSV() {
-    std::ifstream fin("../historicalData/14.01.23/ETHUSDT-1m-2023-01-14.csv");
-    std::string line;
-    std::string components;
-    while (getline(fin, line, '\n')) {
-        std::cout << line << std::endl;
-        std::stringstream candle(line);
-        while (getline(candle, components, ',')) {
-            std::cout << components << std::endl;
+
+#define ONEHOUR_ONEMONTH 672
+#define ONEMIN_ONEWEEK 10080
+#define ONESEC_ONEDAY 86400
+
+inline void fillCandleStick(std::string line, candlestick &data) {
+    std::stringstream candle(line);
+    std::string component;
+    
+    getline(candle, component, ',');
+    
+    getline(candle, component, ',');
+    data.setopenPrice(stod(component));
+    getline(candle, component, ',');
+    data.setpriceHigh(stod(component));
+   
+    getline(candle, component, ',');
+    data.setpriceLow(stod(component));
+    
+    getline(candle, component, ',');
+    data.setclosePrice(stod(component));
+    
+    getline(candle, component, ',');
+    data.setbaseVolume(stod(component));
+    
+    getline(candle, component, ',');
+  
+    getline(candle, component, ',');
+    data.setquoteVolume(stod(component));
+    data.setClosed(true);
+}
+
+namespace fs = std::filesystem;
+inline void parseCSV(std::string &directory) {
+    for (const auto &entry : fs::directory_iterator(directory)) {
+        if (!entry.is_directory()) {
+            continue;
         }
-        break;
+        int numFiles = 0;
+        for (const auto &file : fs::directory_iterator(entry)) {
+            numFiles++;
+        }
+        cData newTest(ONEMIN_ONEWEEK);
+        for (auto i = 1; i <= numFiles; i++) {
+            std::string path = entry.path().generic_string() + "/" + std::to_string(i) + ".csv";
+            std::ifstream fin(path);
+            std::string line;
+            while(getline(fin, line)) {
+                candlestick data;
+                fillCandleStick(line, data);
+                newTest.addCandlestick(data);
+            }
+            
+        }
+        
     }
 }
 
-namespace json = boost::json;
 inline int backTest () {
-        /*
-        auto apiKey = "33d6fUXxSpFAeQDQ77yYMpx8Qhlop4zCj7k16En3uvkjKQnwM61EFbhUMkLcXkwr";
-        auto secretKey = "Y1UBX9a38Gk38Zpx4eWigQReqahJKyIFGjpUzlqrv6PVZvPFKZGAxLSJQWnuJpB0";
-        std::string host = "testnet.binance.vision";
-        std::string port = "443";
-        
-        cData candlesticks(ONEMIN_ONEWEEK);
-        // Create the I/O context
-        boost::asio::io_context ioc;
-
-        // Creates SSL context and holds certificate
-         ssl::context ctx{ssl::context::tlsv12_client};
-    
-        tcp::resolver resolver(ioc);
-        // Create the WebSocket stream
-        websocket::stream<beast::ssl_stream<tcp::socket>> ws{ioc, ctx};
-
-        // Resolve the hostname
-        auto endpoints = resolver.resolve(host, port);
-
-        // Connect to the first endpoint in the list
-        auto ep = net::connect(get_lowest_layer(ws), endpoints);
-        
-        //Set SNI HostName
-        if(! SSL_set_tlsext_host_name(ws.next_layer().native_handle(), host.c_str()))
-            throw beast::system_error(
-                beast::error_code(
-                    static_cast<int>(::ERR_get_error()),
-                    net::error::get_ssl_category()),
-                "Failed to set SNI Hostname");
-        host += ':' + std::to_string(ep.port());
-
-        ws.next_layer().handshake(ssl::stream_base::client);
-
-        ws.set_option(websocket::stream_base::decorator(
-            [](websocket::request_type& req)
-            {
-                req.set(http::field::user_agent,
-                    std::string(BOOST_BEAST_VERSION_STRING) +
-                        " websocket-client-coro");
-            }));
-
-        boost::beast::error_code ec;
-
-        ws.handshake(host, "/ws-api/v3", ec);
-
-        if(ec) {
-            std::cerr << "Error with handshake: " << ec.message() << std::endl;
-            return EXIT_FAILURE;
-        }
-        
-        paramBuild params;
-        params.apiKey(apiKey);
-        params.side("BUY");
-        params.symbolTrade("ETHUSDT");
-        params.time();
-        params.type("MARKET");
-        params.quantity("1.1");
-        params.signature(secretKey);
-        object accountInfo({
-            {"id", "1234"},
-            {"method", "order.place"},
-            {"params", params.objectComp()}
-        });
-        std::cout << accountInfo << " it printed" << '\n' << std::endl;
-        ws.write(boost::asio::buffer(serialize(accountInfo)));
-        boost::beast::multi_buffer buffer;
-        ws.read(buffer);
-        std::cout << boost::beast::make_printable(buffer.data()) << std::endl; */
-        parseCSV();
-        
+    std::string directory = "../historicalData";
+    parseCSV(directory);
     return EXIT_SUCCESS;
 }
 

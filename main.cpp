@@ -1,10 +1,12 @@
 #include "liveTrades.hpp"
 #include "backTesting.hpp"
+#include "liveTesting.hpp"
 
 int main(int argc, char **argv) {
-    bool testing = false;
+    bool testing = true;
     if (testing) {
-        backTest();
+        liveTest();
+        //backTest();
     } else {
         marketStream();
     }

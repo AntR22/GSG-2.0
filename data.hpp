@@ -26,6 +26,11 @@ class cData {
         }
         checkStartIndex();
     }
+    void addCandlestick(candlestick candle) {
+        cp[startIndex] = candle;
+        startIndex++;
+        checkStartIndex();
+    }
     void checkStartIndex () {
         if (startIndex >= arraySize) {
             startIndex = 0;

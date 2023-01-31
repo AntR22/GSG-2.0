@@ -80,6 +80,7 @@
         "algorithm": "cpp",
         "utility": "cpp",
         "*.ipp": "cpp",
+        "filesystem": "cpp",
         "__std_stream": "cpp",
         "bit": "cpp",
         "cfenv": "cpp",
