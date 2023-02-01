@@ -1,3 +1,5 @@
+#pragma once
+
 #include <chrono>
 #include "responseConstructor.hpp"
 
@@ -13,7 +15,7 @@ inline int liveTest () {
         boost::asio::io_context ioc;
 
         // Creates SSL context and holds certificate
-         ssl::context ctx{ssl::context::tlsv12_client};
+        ssl::context ctx{ssl::context::tlsv12_client};
     
         tcp::resolver resolver(ioc);
         // Create the WebSocket stream

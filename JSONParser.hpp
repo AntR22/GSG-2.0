@@ -18,13 +18,13 @@ class candlestick{
 
     public:
         candlestick (double oP = 0, double cP = 0, double pH = 0, double pL = 0, double bV = 0, double qV = 0, bool iC = false) {
-        openPrice = oP;
-        closePrice = cP;
-        priceHigh = pH;
-        priceLow = pL;
-        baseVolume = bV;
-        quoteVolume = qV;
-        isClosed = iC;
+            openPrice = oP;
+            closePrice = cP;
+            priceHigh = pH;
+            priceLow = pL;
+            baseVolume = bV;
+            quoteVolume = qV;
+            isClosed = iC;
         };
 
         void setopenPrice(double p) {
@@ -101,6 +101,11 @@ class tradeData {
         }
         double getTime () {
             return time;
+        }
+        void printTrade () {
+            std::cout << "Price: "<< price << std::endl;
+            std::cout << "Volume: "<< volume << std::endl;
+            std::cout << "Time: "<< time << std::endl;
         }
 };
 
