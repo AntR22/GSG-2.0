@@ -3,7 +3,7 @@
 ![Lines of code](https://img.shields.io/tokei/lines/github/Sanktrip/GSG-2.0)
 
 ## To Do:
-- [ ] Complete backtesting structure and run
+- [x] Complete backtesting structure and run
 - [ ] Restructure project into cpp and hpp files, this requires fixing boost duplicate symbols linking issue
 - [ ] Add CI/CD pipeline
 - [ ] Finish volume profile
