@@ -48,6 +48,9 @@ inline void parseCSV(std::string &directory) {
                 fillCandleStick(line, data);
                 newTest.addCandlestick(data);
             }
+            //execute strategy when newTest is filled
+
+            
             
             
         }
