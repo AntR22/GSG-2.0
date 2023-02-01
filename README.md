@@ -1,5 +1,6 @@
 # GSG-2.0
-![GitHub file size in bytes](https://img.shields.io/github/size/Sanktrip/GSG-2.0)
+![GitHub repo size](https://img.shields.io/github/repo-size/sanktrip/GSG-2.0)
+![Lines of code](https://img.shields.io/tokei/lines/github/Sanktrip/GSG-2.0)
 
 ## To Do:
 - [ ] Complete backtesting structure and run
