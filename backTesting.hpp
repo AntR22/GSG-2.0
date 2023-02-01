@@ -13,27 +13,17 @@
 inline void fillCandleStick(std::string line, candlestick &data) {
     std::stringstream candle(line);
     std::string component;
-    
-    getline(candle, component, ',');
-    
-    getline(candle, component, ',');
-    data.setopenPrice(stod(component));
-    getline(candle, component, ',');
-    data.setpriceHigh(stod(component));
-   
-    getline(candle, component, ',');
-    data.setpriceLow(stod(component));
-    
-    getline(candle, component, ',');
-    data.setclosePrice(stod(component));
-    
-    getline(candle, component, ',');
-    data.setbaseVolume(stod(component));
-    
-    getline(candle, component, ',');
-  
-    getline(candle, component, ',');
-    data.setquoteVolume(stod(component));
+    auto allValues = std::vector<std::string>{};
+    for (int i = 0; i < 8; i++) {
+        getline(candle, component, ',');
+        allValues.push_back(component);
+    }
+    data.setopenPrice(stod(allValues[1]));
+    data.setpriceHigh(stod(allValues[2]));
+    data.setpriceLow(stod(allValues[3]));
+    data.setclosePrice(stod(allValues[4]));
+    data.setbaseVolume(stod(allValues[5]));
+    data.setquoteVolume(stod(allValues[7]));
     data.setClosed(true);
 }
 
@@ -52,11 +42,13 @@ inline void parseCSV(std::string &directory) {
             std::string path = entry.path().generic_string() + "/" + std::to_string(i) + ".csv";
             std::ifstream fin(path);
             std::string line;
+            int j = 0;
             while(getline(fin, line)) {
                 candlestick data;
                 fillCandleStick(line, data);
                 newTest.addCandlestick(data);
             }
+            
             
         }
         

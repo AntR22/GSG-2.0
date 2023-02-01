@@ -5,8 +5,8 @@
 int main(int argc, char **argv) {
     bool testing = true;
     if (testing) {
-        liveTest();
-        //backTest();
+        //liveTest();
+        backTest();
     } else {
         marketStream();
     }
