@@ -50,7 +50,6 @@ inline double basicIndicators(std::string type, cData &candlesticks, int period 
                        candlesticks.accessDataAtTime(i).getclosePrice());
             }
         }
-
         AG = AG / period;
         AL = AL / period;
         if (AL == 0) {

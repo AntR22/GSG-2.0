@@ -37,24 +37,20 @@ inline void parseCSV(std::string &directory) {
         for (const auto &file : fs::directory_iterator(entry)) {
             numFiles++;
         }
-        cData newTest(ONEMIN_ONEWEEK);
+        cData newTest(10);
         for (auto i = 1; i <= numFiles; i++) {
             std::string path = entry.path().generic_string() + "/" + std::to_string(i) + ".csv";
             std::ifstream fin(path);
             std::string line;
             int j = 0;
-            while(getline(fin, line)) {
+            while (getline(fin, line)) {
+                std::cout << "line" << std::endl;
                 candlestick data;
                 fillCandleStick(line, data);
                 newTest.addCandlestick(data);
             }
-            //execute strategy when newTest is filled
-
-            
-            
-            
+            newTest.printAllData();
         }
-        
     }
 }
 
