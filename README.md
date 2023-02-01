@@ -1,4 +1,5 @@
 # GSG-2.0
+https://img.shields.io/github/size/Sanktrip/GSG-2.0
 
 ## To Do:
 - [ ] Complete backtesting structure and run
