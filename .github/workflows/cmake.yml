@@ -27,9 +27,10 @@ jobs:
       
     - name: Install openssl
       run: |
-        brew update
-        brew install openssl
-        cmake -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl -DOPENSSL_LIBRARIES=/usr/local/opt/openssl/lib
+        brew upgrade openssl
+        brew link --force openssl
+        pkg-config --modversion openssl
+        #1.1.1l
 
     - name: Removing existing build DIR
       run: |
