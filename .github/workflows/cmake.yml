@@ -26,11 +26,9 @@ jobs:
         brew install boost
       
     - name: Install openssl
-      run: |
-        brew upgrade openssl
-        brew link --force openssl
-        pkg-config --modversion openssl
-        #1.1.1l
+      run: 
+        brew uninstall openssl
+        brew install openssl@1.1
 
     - name: Removing existing build DIR
       run: |
