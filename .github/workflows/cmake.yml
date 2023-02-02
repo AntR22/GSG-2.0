@@ -26,7 +26,7 @@ jobs:
         brew install boost
       
     - name: Install openssl
-      run: 
+      run: |
         brew uninstall openssl
         brew install openssl@1.1
 
