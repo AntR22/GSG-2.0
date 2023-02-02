@@ -28,7 +28,7 @@ jobs:
     - name: Install openssl
       run: |
         brew update
-        brew install openssl@3
+        brew install openssl
 
     - name: Removing existing build DIR
       run: rm -r ${{github.workspace}}/build
