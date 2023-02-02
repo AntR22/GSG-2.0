@@ -29,7 +29,7 @@ jobs:
       run: |
         brew update
         brew install openssl
-        brew link openssl --force
+        cmake -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl -DOPENSSL_LIBRARIES=/usr/local/opt/openssl/lib
 
     - name: Removing existing build DIR
       run: |
