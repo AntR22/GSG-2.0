@@ -151,14 +151,15 @@ inline candlestick createCandlestickObject (std::string s) {
 }
 
 inline std::string create_subscription_message(std::string stream) {
+    value message;
     if (stream == "eth trades") {
-        value message = {
+        message = {
             {"method", "SUBSCRIBE"},
             {"params", {"ethusdt@trade"}},
             {"id", 1}
         };
     } else if (stream == "eth klines") {
-        value message = {
+        message = {
             {"method", "SUBSCRIBE"},
             {"params", {"ethusdt@kline_1m"}},
             {"id", 1}
