@@ -103,20 +103,14 @@ class tradeData {
             return time;
         }
         void printTrade () {
-            std::cout << "Price: "<< price << std::endl;
-            std::cout << "Volume: "<< volume << std::endl;
-            std::cout << "Time: "<< time << std::endl;
+            std::cout << " P: "<< price << "V: "<< volume << "T: "<< time << std::endl;
         }
 };
 
 using namespace boost::json;
 
 inline tradeData setTradeData (std::string s) {
-    error_code ec;
-    value const &obj = parse(s, ec);
-    if (ec) {
-        std::cout << "Parse Failed:" << ec.message() << std::endl;
-    }
+    value const &obj = parse(s);
 
     double price = std::stod(value_to<std::string>(obj.at("p")));
     double vol = std::stod(value_to<std::string>(obj.at("q")));
@@ -156,11 +150,19 @@ inline candlestick createCandlestickObject (std::string s) {
     return c;
 }
 
-inline std::string create_subscription_message() {
-    value message = {
-        {"method", "SUBSCRIBE"},
-        {"params", {"ethusdt@kline_1m"}},
-        {"id", 1}
-    };
+inline std::string create_subscription_message(std::string stream) {
+    if (stream == "eth trades") {
+        value message = {
+            {"method", "SUBSCRIBE"},
+            {"params", {"ethusdt@trade"}},
+            {"id", 1}
+        };
+    } else if (stream == "eth klines") {
+        value message = {
+            {"method", "SUBSCRIBE"},
+            {"params", {"ethusdt@kline_1m"}},
+            {"id", 1}
+        };
+    }
     return serialize(message);
 }
