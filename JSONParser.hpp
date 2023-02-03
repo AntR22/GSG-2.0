@@ -114,8 +114,8 @@ inline tradeData setTradeData (std::string s) {
 
     double price = std::stod(value_to<std::string>(obj.at("p")));
     double vol = std::stod(value_to<std::string>(obj.at("q")));
-    int time = value_to<int>(obj.at("T"));
-
+    int64_t timei = value_to<int64_t>(obj.at("T"));
+    int time = timei;
     tradeData tD(price, vol, time);
 
     return tD;
@@ -155,7 +155,7 @@ inline std::string create_subscription_message(std::string stream) {
     if (stream == "eth trades") {
         message = {
             {"method", "SUBSCRIBE"},
-            {"params", {"ethusdt@trade"}},
+            {"params", {"ethusdt@aggTrade"}},
             {"id", 1}
         };
     } else if (stream == "eth klines") {
