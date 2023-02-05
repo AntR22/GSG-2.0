@@ -26,8 +26,9 @@ jobs:
         brew install boost
       
     - name: Install openssl
-      run: brew install openssl@1.1
-      run: OPENSSL_ROOT_DIR=$(brew --prefix openssl)
+      run: |
+        brew install openssl@1.1
+        OPENSSL_ROOT_DIR=$(brew --prefix openssl)
 
     - name: Removing existing build DIR
       run: |
