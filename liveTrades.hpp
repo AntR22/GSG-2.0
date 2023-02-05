@@ -38,7 +38,7 @@ inline int marketStream() {
         std::tm tm = *std::localtime(&t);
 
         cData testing(ONEMIN_ONEHOUR);
-        volumeProfile testvolume(0.1, 1000.0);
+        volumeProfile testvolume(0.01, 1000.0, false, 0.01);
         // WebSocket endpoint
         std::string host = "stream.binance.com";
         std::string port = "443";
@@ -92,7 +92,6 @@ inline int marketStream() {
         // Send the subscription message
         ws.write(boost::asio::buffer(subscription_message));
         // Receive messages
-        int i = 0;
         for (;;) {
             boost::beast::multi_buffer buffer;
             ws.read(buffer);
@@ -103,13 +102,9 @@ inline int marketStream() {
             } else {
                 //testing.addCandlestick(message);
                 testvolume.addTrade(message);
-                i++;
-            }
-            if (i == 200) {
-                break;
             }
         }
-        testvolume.printProfile();
+
         std::cout << "End Time:\n" << std::put_time(&tm, "%c") << std::endl;
         return 0;
     }
