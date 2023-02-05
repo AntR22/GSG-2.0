@@ -33,8 +33,8 @@ jobs:
 
     -name: Set Compiler Variables
       run: |
-      export LDFLAGS="-L/usr/local/opt/openssl@3/lib"
-      export CPPFLAGS="-I/usr/local/opt/openssl@3/include"
+        export LDFLAGS="-L/usr/local/opt/openssl@3/lib"
+        export CPPFLAGS="-I/usr/local/opt/openssl@3/include"
 
     - name: Removing existing build DIR
       run: |
