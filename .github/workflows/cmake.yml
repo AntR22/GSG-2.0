@@ -29,7 +29,7 @@ jobs:
       run: brew reinstall openssl@1.1
 
     - name: Set Root DIR
-      run: OPENSSL_ROOT_DIR=$((brew --prefix openssl)/1.1.1)
+      run: OPENSSL_ROOT_DIR=$(brew --prefix openssl)/1.1.1
 
     - name: openssl PKG_CONFIG_PATH
       run: export PATH="/usr/local/opt/openssl@3/bin:$PATH"
