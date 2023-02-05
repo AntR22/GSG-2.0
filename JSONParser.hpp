@@ -18,13 +18,13 @@ class candlestick{
 
     public:
         candlestick (double oP = 0, double cP = 0, double pH = 0, double pL = 0, double bV = 0, double qV = 0, bool iC = false) {
-        openPrice = oP;
-        closePrice = cP;
-        priceHigh = pH;
-        priceLow = pL;
-        baseVolume = bV;
-        quoteVolume = qV;
-        isClosed = iC;
+            openPrice = oP;
+            closePrice = cP;
+            priceHigh = pH;
+            priceLow = pL;
+            baseVolume = bV;
+            quoteVolume = qV;
+            isClosed = iC;
         };
 
         void setopenPrice(double p) {
@@ -111,21 +111,20 @@ class tradeData {
         double getTime () {
             return time;
         }
+        void printTrade () {
+            std::cout << " P: "<< price << "V: "<< volume << "T: "<< time << std::endl;
+        }
 };
 
 using namespace boost::json;
 
 inline tradeData setTradeData (std::string s) {
-    error_code ec;
-    value const &obj = parse(s, ec);
-    if (ec) {
-        std::cout << "Parse Failed:" << ec.message() << std::endl;
-    }
+    value const &obj = parse(s);
 
     double price = std::stod(value_to<std::string>(obj.at("p")));
     double vol = std::stod(value_to<std::string>(obj.at("q")));
-    int time = value_to<int>(obj.at("T"));
-
+    int64_t timei = value_to<int64_t>(obj.at("T"));
+    int time = timei;
     tradeData tD(price, vol, time);
 
     return tD;
@@ -160,12 +159,21 @@ inline candlestick createCandlestickObject (std::string s) {
     return c;
 }
 
-inline std::string create_subscription_message() {
-    value message = {
-        {"method", "SUBSCRIBE"},
-        {"params", {"ethusdt@kline_1m"}},
-        {"id", 1}
-    };
+inline std::string create_subscription_message(std::string stream) {
+    value message;
+    if (stream == "eth trades") {
+        message = {
+            {"method", "SUBSCRIBE"},
+            {"params", {"ethusdt@aggTrade"}},
+            {"id", 1}
+        };
+    } else if (stream == "eth klines") {
+        message = {
+            {"method", "SUBSCRIBE"},
+            {"params", {"ethusdt@kline_1m"}},
+            {"id", 1}
+        };
+    }
     return serialize(message);
 }
 

@@ -5,10 +5,13 @@ set(CMAKE_CXX_STANDARD 20)
 add_compile_options(-std=c++11)
 add_compile_options(-Wno-deprecated)
 
+# optimisation flags
+add_compile_options(-O3)
+
 # should disable automatic linking of boost libraries
-add_compile_options(-DBOOST_ALL_NO_LIB=ON)
+#add_compile_options(-DBOOST_ALL_NO_LIB=ON)
 # not define certain symbols that are already defined 
-add_compile_options(-DBOOST_NO_DUPLICATE_DEFINITIONS)
+#add_compile_options(-DBOOST_NO_DUPLICATE_DEFINITIONS)
 
 # Find and include the Boost libraries
 find_package(Boost 1.74.0 REQUIRED COMPONENTS system)

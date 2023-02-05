@@ -3,7 +3,7 @@
 #include "liveTesting.hpp"
 
 int main(int argc, char **argv) {
-    bool testing = true;
+    bool testing = false;
     if (testing) {
         //liveTest();
         backTest();

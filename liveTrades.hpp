@@ -38,6 +38,7 @@ inline int marketStream() {
         std::tm tm = *std::localtime(&t);
 
         cData testing(ONEMIN_ONEHOUR);
+        volumeProfile testvolume(0.01, 1000.0, false, 0.01);
         // WebSocket endpoint
         std::string host = "stream.binance.com";
         std::string port = "443";
@@ -78,40 +79,32 @@ inline int marketStream() {
 
         boost::beast::error_code ec;
 
-        ws.handshake(host, "/ws/ethusdt@kline_1m", ec);
+        //ws.handshake(host, "/ws/ethusdt@kline_1m", ec);
+        ws.handshake(host, "/ws/ethusdt@aggTrade", ec);
 
-        if(ec) {
+        if (ec) {
             std::cerr << "Error with handshake: " << ec.message() << std::endl;
             return EXIT_FAILURE;
         }
         //subscription message
-        std::string subscription_message = create_subscription_message();
+        std::string subscription_message = create_subscription_message("eth trades");
 
         // Send the subscription message
         ws.write(boost::asio::buffer(subscription_message));
-
         // Receive messages
         for (;;) {
             boost::beast::multi_buffer buffer;
             ws.read(buffer);
-            if (buffer.size() == 0) {
-                break;
-            }
             auto message = boost::beast::buffers_to_string(buffer.data());
-            ws.pong("pong");
+            //ws.pong("pong");
             if (message == "{\"result\":null,\"id\":1}") {
                 std::cout << "Start Time:\n" << std::put_time(&tm, "%c") << std::endl;
             } else {
-                testing.addCandlestick(message);
-            }
-            if (testing.allCandlesClosed()) {
-                std::cout << std::fixed;
-                std::cout << "RSI: " << basicIndicators("RSI", testing) << std::endl;
-                std::cout << "VWAP: " << basicIndicators("VWAP", testing) << std::endl;
-                std::cout << "SMA: " << basicIndicators("SMA", testing) << std::endl;
-                testing.printAllData(true);
+                //testing.addCandlestick(message);
+                testvolume.addTrade(message);
             }
         }
+
         std::cout << "End Time:\n" << std::put_time(&tm, "%c") << std::endl;
         return 0;
     }
