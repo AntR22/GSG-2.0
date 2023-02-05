@@ -29,19 +29,7 @@ jobs:
       run: brew reinstall openssl@1.1
 
     - name: Set Root DIR
-      run: OPENSSL_ROOT_DIR=$(brew --prefix openssl)
-
-    - name: openssl PKG_CONFIG_PATH
-      run: export PATH="/usr/local/opt/openssl@3/bin:$PATH"
-      
-    - name: Set Compiler Variable 1
-      run: export LDFLAGS="-L/usr/local/opt/openssl@3/lib"
-
-    - name: Set Compiler Variable 2
-      run: export CPPFLAGS="-I/usr/local/opt/openssl@3/include"
-
-    - name: PKG config Variable
-      run: export PKG_CONFIG_PATH="/usr/local/opt/openssl@3/lib/pkgconfig"
+      run: OPENSSL_ROOT_DIR="/usr/local/opt/openssl@3"
 
     - name: Removing existing build DIR
       run: |
