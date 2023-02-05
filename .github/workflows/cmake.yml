@@ -37,10 +37,10 @@ jobs:
         mkdir ${{github.workspace}}/build
       
     - name: debug
-      run: ls /usr/local/Cellar/openssl@1.1/
+      run: ls /usr/local/Cellar/openssl@1.1/1.1.1s
 
     - name: debug 2
-      run: ls /usr/local/Cellar/openssl@1.1/lib/
+      run: ls /usr/local/Cellar/openssl@1.1/1.1.1s/lib/
 
 
     - name: Create Cmake files
