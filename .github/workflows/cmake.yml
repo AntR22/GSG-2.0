@@ -31,10 +31,10 @@ jobs:
     - name: Set Root DIR
       run: OPENSSL_ROOT_DIR=$(brew --prefix openssl)
 
-    -name: Set Compiler Variable 1
+    - name: Set Compiler Variable 1
       run: export LDFLAGS="-L/usr/local/opt/openssl@3/lib"
 
-    -name: Set Compiler Variable 2
+    - name: Set Compiler Variable 2
       run: export CPPFLAGS="-I/usr/local/opt/openssl@3/include"
 
     - name: Removing existing build DIR
