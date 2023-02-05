@@ -69,6 +69,15 @@ class candlestick{
         bool getClosed(void) {
             return isClosed;
         }
+        void printCandlestick() {
+            std::cout << openPrice << std::endl;
+            std::cout << priceHigh << std::endl;
+            std::cout << priceLow << std::endl;
+            std::cout << closePrice << std::endl;
+            std::cout << baseVolume << std::endl;
+            std::cout << quoteVolume << std::endl;
+            std::cout << isClosed << std::endl;
+        }
 };
 
 class tradeData {
@@ -167,3 +176,4 @@ inline std::string create_subscription_message(std::string stream) {
     }
     return serialize(message);
 }
+
