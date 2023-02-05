@@ -27,6 +27,7 @@ jobs:
       
     - name: Install openssl
       run: brew install openssl@1.1
+      run: OPENSSL_ROOT_DIR=$(brew --prefix openssl)
 
     - name: Removing existing build DIR
       run: |
