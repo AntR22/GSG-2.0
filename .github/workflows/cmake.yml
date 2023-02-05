@@ -36,6 +36,13 @@ jobs:
         rm -r ${{github.workspace}}/build
         mkdir ${{github.workspace}}/build
       
+    - name: debug
+      run: ls /usr/local/Cellar/openssl@1.1/
+
+    - name: debug 2
+      run: ls /usr/local/Cellar/openssl@1.1/lib/
+
+
     - name: Create Cmake files
       run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
