@@ -6,7 +6,7 @@
 - [x] Complete backtesting structure and run
 - [ ] Restructure project into cpp and hpp files, this requires fixing boost duplicate symbols linking issue
 - [ ] Add CI/CD pipeline
-- [ ] Finish volume profile
+- [x] Finish volume profile
 - [ ] Make pong asynchronous 
 - [ ] Finish time profile
 - [ ] Add trading strategies
