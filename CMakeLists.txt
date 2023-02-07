@@ -9,9 +9,9 @@ add_compile_options(-Wno-deprecated)
 add_compile_options(-O3)
 
 # should disable automatic linking of boost libraries
-#add_compile_options(-DBOOST_ALL_NO_LIB=ON)
+add_compile_options(-DBOOST_ALL_NO_LIB=ON)
 # not define certain symbols that are already defined 
-#add_compile_options(-DBOOST_NO_DUPLICATE_DEFINITIONS)
+add_compile_options(-DBOOST_NO_DUPLICATE_DEFINITIONS)
 
 # Find and include the Boost libraries
 find_package(Boost 1.74.0 REQUIRED COMPONENTS system)
@@ -22,7 +22,7 @@ find_package(OpenSSL REQUIRED)
 include_directories(${OPENSSL_INCLUDE_DIR})
 
 # Add your source files here
-set(SOURCES main.cpp)
+set(SOURCES main.cpp data.cpp backTesting.cpp indicators.cpp liveTesting.cpp liveTrades.cpp strategies.cpp)
 
 # Create the executable
 add_executable(GSG-2.0 ${SOURCES})

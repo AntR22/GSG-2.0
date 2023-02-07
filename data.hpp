@@ -1,5 +1,6 @@
 #pragma once
 
+#define BOOST_JSON_STACK_BUFFER_SIZE 1024
 #include <string>
 #include <iostream>
 #include <assert.h>
@@ -7,7 +8,126 @@
 #include <queue>
 #include <limits>
 #include <cmath>
-#include "JSONParser.hpp"
+#include <sstream>
+#include <string>
+
+class candlestick{
+    private:
+        double openPrice;
+        double closePrice;
+        double priceHigh;
+        double priceLow;
+        double baseVolume;
+        double quoteVolume;
+        bool isClosed;
+
+    public:
+        candlestick (double oP = 0, double cP = 0, double pH = 0, double pL = 0, double bV = 0, double qV = 0, bool iC = false) {
+            openPrice = oP;
+            closePrice = cP;
+            priceHigh = pH;
+            priceLow = pL;
+            baseVolume = bV;
+            quoteVolume = qV;
+            isClosed = iC;
+        };
+
+        void setopenPrice(double p) {
+            openPrice = p;
+        }
+        double getopenPrice(void) {
+            return openPrice;
+        }
+        void setclosePrice(double p) {
+            closePrice = p;
+        }
+        double getclosePrice(void) {
+            return closePrice;
+        }
+        void setpriceHigh(double p) {
+            priceHigh = p;
+        }
+        double getpriceHigh(void) {
+            return priceHigh;
+        }
+        void setpriceLow(double p) {
+            priceLow = p;
+        }
+        double getpriceLow(void) {
+            return priceLow;
+        } 
+        void setbaseVolume(double v) {
+            baseVolume = v;
+        }
+        double getbaseVolume(void) {
+            return baseVolume;
+        }
+        void setquoteVolume(double v) {
+            quoteVolume = v;
+        }
+        double getquoteVolume(void) {
+            return quoteVolume;
+        } 
+        void setClosed(bool c) {
+            isClosed = c;
+        }
+        bool getClosed(void) {
+            return isClosed;
+        }
+        void printCandlestick() {
+            std::cout << openPrice << std::endl;
+            std::cout << priceHigh << std::endl;
+            std::cout << priceLow << std::endl;
+            std::cout << closePrice << std::endl;
+            std::cout << baseVolume << std::endl;
+            std::cout << quoteVolume << std::endl;
+            std::cout << isClosed << std::endl;
+        }
+};
+
+class tradeData {
+    private:
+        double price;
+        double volume;
+        int time;
+
+    public:
+        tradeData (double p, double v, int t) {
+            price = p;
+            volume = v;
+            time = t;
+        };
+
+        void setPrice (double p) {
+            price = p;
+        }
+        void setVolume (double v) {
+            volume = v;
+        }
+        void setTime (int t) {
+            time = t;
+        }
+        double getPrice () {
+            return price;
+        }
+        double getVolume () {
+            return volume;
+        }
+        double getTime () {
+            return time;
+        }
+        void printTrade () {
+            std::cout << " P: "<< price << "V: "<< volume << "T: "<< time << std::endl;
+        }
+};
+
+tradeData setTradeData (std::string s);
+
+std::string checkDataInterval (std::string s);
+
+candlestick createCandlestickObject (std::string s);
+
+std::string create_subscription_message(std::string stream);
 
 class cData {
     private:
@@ -92,6 +212,7 @@ class cData {
             return false;
         }
 };
+
 
 class valueArea {
     public:
