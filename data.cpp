@@ -9,29 +9,37 @@ tradeData setTradeData (std::string s) {
 
     double price = std::stod(value_to<std::string>(obj.at("p")));
     double vol = std::stod(value_to<std::string>(obj.at("q")));
-    int64_t timei = value_to<int64_t>(obj.at("T"));
-    int time = timei;
-    tradeData tD(price, vol, time);
+    int64_t timei = value_to<int64_t>(obj.at("t"));
+    tradeData tD(price, vol, timei);
 
     return tD;
 }
 
+timeCandlestick createTimeCandle (std::string s) {
+    value const &objJS = parse(s);
+
+    value const &obj = objJS.at("k");
+    double oP = std::stod(value_to<std::string>(obj.at("o")));
+    double cP = std::stod(value_to<std::string>(obj.at("c")));
+    double pH = std::stod(value_to<std::string>(obj.at("h")));
+    double pL = std::stod(value_to<std::string>(obj.at("l")));
+    int64_t timei = value_to<int64_t>(obj.at("t"));
+    bool closed = value_to<bool>(obj.at("x"));
+    timeCandlestick c (timei, oP, cP, pH, pL, closed);
+
+    return c;
+}
+
 std::string checkDataInterval (std::string s) {
-    error_code ec;
-    value const &objJS = parse(s, ec);
-    if (ec) {
-        std::cout << "Parse Failed:" << ec.message() << std::endl;
-    }
+    value const &objJS = parse(s);
+
     value const &obj = objJS.at("k");
     return value_to<std::string>(obj.at("i"));
 }
 
 candlestick createCandlestickObject (std::string s) {
-    error_code ec;
-    value const &objJS = parse(s, ec);
-    if (ec) {
-        std::cout << "Parse Failed:" << ec.message() << std::endl;
-    }
+    value const &objJS = parse(s);
+
     value const &obj = objJS.at("k");
     double oP = std::stod(value_to<std::string>(obj.at("o")));
     double cP = std::stod(value_to<std::string>(obj.at("c")));
@@ -53,12 +61,20 @@ std::string create_subscription_message(std::string stream) {
             {"params", {"ethusdt@aggTrade"}},
             {"id", 1}
         };
-    } else if (stream == "eth klines") {
+    } else if (stream == "eth klines 1m") {
         message = {
             {"method", "SUBSCRIBE"},
             {"params", {"ethusdt@kline_1m"}},
             {"id", 1}
         };
+    } else if (stream == "eth klines 1s") {
+        message = {
+            {"method", "SUBSCRIBE"},
+            {"params", {"ethusdt@kline_1s"}},
+            {"id", 1}
+        };
+    } else {
+        std::cout << "no sub msg" << std::endl;
     }
     return serialize(message);
 }

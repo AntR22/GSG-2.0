@@ -85,14 +85,36 @@ class candlestick{
         }
 };
 
+class timeCandlestick {
+    private:
+        double averagePrice;
+        int64_t time;
+        bool isClosed;
+    public:
+        timeCandlestick (int64_t t, double oP, double cP, double pH, double pL, bool closed = false) {
+            time = t;
+            averagePrice = ((oP + cP + pH + pL) / 4);
+            isClosed = closed;
+        }
+        int64_t getTime (void) {
+            return time;
+        }
+        double getAveragePrice (void) {
+            return averagePrice;
+        }
+        bool getClosed(void) {
+            return isClosed;
+        }
+};
+
 class tradeData {
     private:
         double price;
         double volume;
-        int time;
+        int64_t time;
 
     public:
-        tradeData (double p, double v, int t) {
+        tradeData (double p, double v, int64_t t) {
             price = p;
             volume = v;
             time = t;
@@ -104,7 +126,7 @@ class tradeData {
         void setVolume (double v) {
             volume = v;
         }
-        void setTime (int t) {
+        void setTime (int64_t t) {
             time = t;
         }
         double getPrice () {
@@ -113,7 +135,7 @@ class tradeData {
         double getVolume () {
             return volume;
         }
-        double getTime () {
+        int64_t getTime () {
             return time;
         }
         void printTrade () {
@@ -124,6 +146,8 @@ class tradeData {
 tradeData setTradeData (std::string s);
 
 std::string checkDataInterval (std::string s);
+
+timeCandlestick createTimeCandle (std::string s);
 
 candlestick createCandlestickObject (std::string s);
 
@@ -224,11 +248,11 @@ class volumeData {
     private:
         double totalVolume;
         std::queue<tradeData> trades;
-        int frontDataTime;
+        int64_t frontDataTime;
     public:
         volumeData () {
             totalVolume = 0;
-            frontDataTime = INT_MAX;
+            frontDataTime = INT64_MAX;
         }
         double getPrice () {
             return trades.front().getPrice();
@@ -236,7 +260,7 @@ class volumeData {
         double getTotalVolume () {
             return totalVolume;
         }
-        int getFrontTime () {
+        int64_t getFrontTime () {
             return frontDataTime;
         }
         void addTradeData (tradeData t) {
@@ -253,7 +277,7 @@ class volumeData {
             if (!trades.empty()) {
                 frontDataTime = trades.front().getTime();
             } else {
-                frontDataTime = INT_MAX;
+                frontDataTime = INT64_MAX;
                 assert(totalVolume == 0);
             }
         }
@@ -273,7 +297,7 @@ class volumeData {
 
 class volumeProfile {
     private:
-        double priceIncrement;
+        double precision;
         double POC;
         valueArea VA;
         double profileTotalVolume;
@@ -283,9 +307,9 @@ class volumeProfile {
         std::map<double, volumeData> profile;
 
     public:
-        volumeProfile (double precision, int dataSeriesSize, bool isRollingProfile = true, double minimumVolume = 0) {
-            priceIncrement = precision;
-            dataSize = dataSeriesSize;
+        volumeProfile (double priceIncrement, int dataSeriesSizeSeconds, bool isRollingProfile = true, double minimumVolume = 0) {
+            precision = priceIncrement;
+            dataSize = dataSeriesSizeSeconds * (int64_t)1000;
             minVol = minimumVolume;
             rolling = isRollingProfile;
             POC = 0;
@@ -298,7 +322,7 @@ class volumeProfile {
             }
             profileTotalVolume += tD.getVolume();
             double key;
-            key = (std::round(tD.getPrice() / priceIncrement) * priceIncrement);
+            key = (std::round(tD.getPrice() / precision) * precision);
 
             if (auto check = profile.find(key); check != profile.end()) {
                 (check->second).addTradeData(tD);
@@ -319,7 +343,7 @@ class volumeProfile {
         }
         void removeTrades (int currentTime) {
             for (auto it = profile.begin(); it != profile.end(); ++it) {
-                while ((it->second).getFrontTime() < (currentTime - dataSize)) {
+                while ((it->second).getFrontTime() <= (currentTime - dataSize)) {
                     it->second.removeTradeData();
                 }
             }
@@ -363,14 +387,140 @@ class volumeProfile {
         }
 };
 
-// not finished
+class timeData {
+    private:
+        std::queue<int64_t> times;
+        int totalTime;
+        int64_t frontDataTime;
+    public:
+        timeData () {
+            totalTime = 0;
+            frontDataTime = INT64_MAX;
+        }
+        int getTotalTime () {
+            return totalTime;
+        }
+        int64_t getFrontTime () {
+            return frontDataTime;
+        }
+        void addTime (int64_t time) {
+            totalTime += 1;
+            if (times.empty()) {
+                frontDataTime = time;
+            }
+            times.push(time);
+        }
+        void removeTime () {
+            totalTime -= 1;
+            times.pop();
+            if (!times.empty()) {
+                frontDataTime = times.front();
+            } else {
+                frontDataTime = INT64_MAX;
+                assert(totalTime == 0);
+            }
+        }
+        void printTimeData (bool condensed) {
+            std::cout << "TT :"<< totalTime << std::endl;
+            std::cout << "FT: "<< frontDataTime << std::endl;
+            if (!condensed) {
+                auto copy = times;
+                std::cout << "Q:";
+                while (!copy.empty()) {
+                    std::cout << "|" << copy.front();
+                    copy.pop();
+                }
+                std::cout << std::endl;
+            }
+        }
+};
+
 class timeProfile {
     private:
-        int range;
-        
-        int POC; // point of control
+        double POC;
+        valueArea VA;
+        int64_t dataSize;
+        bool rolling;
+        double precision;
+        int profileTotalTime;
+        std::map<double, timeData> profile;
 
     public:
+        timeProfile (double priceIncrement, int64_t sizeInSeconds, bool isRollingProfile = true) {
+            precision = priceIncrement;
+            dataSize = sizeInSeconds * (int64_t)1000;
+            rolling = isRollingProfile;
+            profileTotalTime = 0;
+            POC = 0;
+        }
+        void addTrade (std::string s) {
+            timeCandlestick tC = createTimeCandle (s);
+            
+            if (!tC.getClosed()) {
+                return;
+            }
+            profileTotalTime += 1;
+            double key;
+            key = (std::round(tC.getAveragePrice() / precision) * precision);
 
+            if (auto check = profile.find(key); check != profile.end()) {
+                (check->second).addTime(tC.getTime());
+                if (check->second.getTotalTime() >= profile.at(POC).getTotalTime()) {
+                    POC = key;
+                }
+            } else {
+                timeData tD;
+                tD.addTime(tC.getTime());
+                profile.emplace(key, tD);
+                if (POC == 0 || profile.at(POC).getTotalTime() <= tD.getTotalTime()) {
+                    POC = key;
+                }
+            }
+            if (rolling) {
+                removeTrades(tC.getTime());
+            }
+        }
+        void removeTrades (int64_t currentTime) {
+            for (auto it = profile.begin(); it != profile.end(); ++it) {
+                while ((it->second).getFrontTime() <= (currentTime - dataSize)) {
+                    it->second.removeTime();
+                    profileTotalTime -= 1;
+                }
+            }
+        }
+        valueArea getValueArea () {
+            valueArea vA;
+            double volSumFront = 0;
+            double volSumBack = 0;
+            double percentvol16 = profileTotalTime / 6.0;
+            for (auto rit = profile.rbegin(); rit != profile.rend(); ++rit) {
+                volSumBack += rit->second.getTotalTime();
+                if (volSumBack >= percentvol16) {
+                    vA.valueAreaUpper = rit->first;
+                    break;
+                }
+            }
+            for (auto it = profile.begin(); it != profile.end(); ++it) {
+                volSumFront += it->second.getTotalTime();
+                if (volSumFront >= percentvol16) {
+                    vA.valueAreaLower = it->first;
+                    break;
+                }
+            }
+            return vA;
+        }
+        void printProfile (bool condensed) {
+            if (!condensed) {
+                for (auto rit = profile.rbegin(); rit != profile.rend(); ++rit) {
+                    std::cout << rit->first << std::endl;
+                    (rit->second).printTimeData(false);
+                }
+            } else {
+                for (auto rit = profile.rbegin(); rit != profile.rend(); ++rit) {
+                    std::cout << rit->first << std::endl;
+                    (rit->second).printTimeData(true);
+                }
+            }
+        }
 };
 
