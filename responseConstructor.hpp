@@ -1,46 +1,19 @@
 #pragma once
 
-#include <boost/json/src.hpp>
+#include "data.hpp"
 #include <map>
 #include <openssl/hmac.h>
 #include <cstdio>
 
-inline std::string queryString(std::map<std::string, std::string> &parameters) {
-        std::string urlQuery = "";
-        for (auto it = parameters.cbegin(); it != parameters.cend(); ++it) {
-                if (it == parameters.cbegin()) {
-                        urlQuery += it->first + '=' + it->second; 
-                } else {
-                        urlQuery += '&' + it->first + '=' + it->second;
-                }
-        }
-        return urlQuery;
-}
+std::string queryString(std::map<std::string, std::string> &parameters);
 
-inline std::string hashQuery(std::map<std::string, std::string> &parameters, const char* key) {
-        std::string query = queryString(parameters);
-        const char* data = query.c_str();
-        unsigned char *result;
-        static char res_hexstring[64];
-        int result_len = 32;
-        std::string signature;
+std::string hashQuery(std::map<std::string, std::string> &parameters, const char* key);
 
-        result = HMAC(EVP_sha256(), key, strlen((char *)key), const_cast<unsigned char *>(reinterpret_cast<const unsigned char*>(data)), strlen((char *)data), NULL, NULL);
-  	for (int i = 0; i < result_len; i++) {
-    	        sprintf(&(res_hexstring[i * 2]), "%02x", result[i]);
-  	}
+std::string tradeRequestObj(std::string apiKey, std::string side, std::string type, std::string quantity, std::string secret);
 
-  	for (int i = 0; i < 64; i++) {
-  		signature += res_hexstring[i];
-  	}
-
-  	return signature;
-}
-
-namespace json = boost::json;
 class paramBuild {
         private:
-                object params = {};
+                boost::json::object params = {};
                 std::map<std::string, std::string> paramsList{};
         public:
                 void apiKey(std::string key) {
@@ -48,8 +21,7 @@ class paramBuild {
                         paramsList.emplace("apiKey", key);
                 }
                 void symbolsArr(std::string token) {
-                        array arr({token});
-                        std::cout << arr << std::endl;
+                        boost::json::array arr({token});
                         params.emplace("symbols", arr);
                 }
                 void limit(int num) {
@@ -90,25 +62,7 @@ class paramBuild {
                 void signature(std::string secretKey) {
                         params.emplace("signature", hashQuery(paramsList, secretKey.c_str()));
                 } 
-                object objectComp() {
+                boost::json::object objectComp() {
                         return params;
                 }
 };
-
-inline std::string tradeRequestObj(std::string apiKey, std::string side, std::string type, std::string quantity, std::string secret) {
-        paramBuild params;
-        params.apiKey(apiKey);
-        params.side(side);
-        params.symbolTrade("ETHUSDT");
-        params.time();
-        params.type(type);
-        params.quantity(quantity);
-        params.signature(secret);
-        object trade({
-            {"id", std::to_string(rand())},
-            {"method", "order.place"},
-            {"params", params.objectComp()}
-        });
-        return serialize(trade);
-}   
-

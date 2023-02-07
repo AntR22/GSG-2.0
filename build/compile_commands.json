@@ -1,7 +1,42 @@
 [
 {
   "directory": "/Users/antonragusa/Desktop/Projects/GSG-2.0/build",
-  "command": "/usr/bin/clang++ -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -isystem /opt/homebrew/include -isystem /opt/homebrew/Cellar/openssl@3/3.0.7/include -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -std=c++11 -Wno-deprecated -O3 -std=gnu++20 -o CMakeFiles/GSG-2.0.dir/main.cpp.o -c /Users/antonragusa/Desktop/Projects/GSG-2.0/main.cpp",
+  "command": "/usr/bin/clang++ -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -isystem /opt/homebrew/include -isystem /opt/homebrew/Cellar/openssl@3/3.0.7/include -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -std=c++11 -Wno-deprecated -O3 -DBOOST_ALL_NO_LIB=ON -DBOOST_NO_DUPLICATE_DEFINITIONS -std=gnu++20 -o CMakeFiles/GSG-2.0.dir/main.cpp.o -c /Users/antonragusa/Desktop/Projects/GSG-2.0/main.cpp",
   "file": "/Users/antonragusa/Desktop/Projects/GSG-2.0/main.cpp"
+},
+{
+  "directory": "/Users/antonragusa/Desktop/Projects/GSG-2.0/build",
+  "command": "/usr/bin/clang++ -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -isystem /opt/homebrew/include -isystem /opt/homebrew/Cellar/openssl@3/3.0.7/include -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -std=c++11 -Wno-deprecated -O3 -DBOOST_ALL_NO_LIB=ON -DBOOST_NO_DUPLICATE_DEFINITIONS -std=gnu++20 -o CMakeFiles/GSG-2.0.dir/data.cpp.o -c /Users/antonragusa/Desktop/Projects/GSG-2.0/data.cpp",
+  "file": "/Users/antonragusa/Desktop/Projects/GSG-2.0/data.cpp"
+},
+{
+  "directory": "/Users/antonragusa/Desktop/Projects/GSG-2.0/build",
+  "command": "/usr/bin/clang++ -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -isystem /opt/homebrew/include -isystem /opt/homebrew/Cellar/openssl@3/3.0.7/include -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -std=c++11 -Wno-deprecated -O3 -DBOOST_ALL_NO_LIB=ON -DBOOST_NO_DUPLICATE_DEFINITIONS -std=gnu++20 -o CMakeFiles/GSG-2.0.dir/backTesting.cpp.o -c /Users/antonragusa/Desktop/Projects/GSG-2.0/backTesting.cpp",
+  "file": "/Users/antonragusa/Desktop/Projects/GSG-2.0/backTesting.cpp"
+},
+{
+  "directory": "/Users/antonragusa/Desktop/Projects/GSG-2.0/build",
+  "command": "/usr/bin/clang++ -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -isystem /opt/homebrew/include -isystem /opt/homebrew/Cellar/openssl@3/3.0.7/include -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -std=c++11 -Wno-deprecated -O3 -DBOOST_ALL_NO_LIB=ON -DBOOST_NO_DUPLICATE_DEFINITIONS -std=gnu++20 -o CMakeFiles/GSG-2.0.dir/indicators.cpp.o -c /Users/antonragusa/Desktop/Projects/GSG-2.0/indicators.cpp",
+  "file": "/Users/antonragusa/Desktop/Projects/GSG-2.0/indicators.cpp"
+},
+{
+  "directory": "/Users/antonragusa/Desktop/Projects/GSG-2.0/build",
+  "command": "/usr/bin/clang++ -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -isystem /opt/homebrew/include -isystem /opt/homebrew/Cellar/openssl@3/3.0.7/include -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -std=c++11 -Wno-deprecated -O3 -DBOOST_ALL_NO_LIB=ON -DBOOST_NO_DUPLICATE_DEFINITIONS -std=gnu++20 -o CMakeFiles/GSG-2.0.dir/liveTesting.cpp.o -c /Users/antonragusa/Desktop/Projects/GSG-2.0/liveTesting.cpp",
+  "file": "/Users/antonragusa/Desktop/Projects/GSG-2.0/liveTesting.cpp"
+},
+{
+  "directory": "/Users/antonragusa/Desktop/Projects/GSG-2.0/build",
+  "command": "/usr/bin/clang++ -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -isystem /opt/homebrew/include -isystem /opt/homebrew/Cellar/openssl@3/3.0.7/include -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -std=c++11 -Wno-deprecated -O3 -DBOOST_ALL_NO_LIB=ON -DBOOST_NO_DUPLICATE_DEFINITIONS -std=gnu++20 -o CMakeFiles/GSG-2.0.dir/liveTrades.cpp.o -c /Users/antonragusa/Desktop/Projects/GSG-2.0/liveTrades.cpp",
+  "file": "/Users/antonragusa/Desktop/Projects/GSG-2.0/liveTrades.cpp"
+},
+{
+  "directory": "/Users/antonragusa/Desktop/Projects/GSG-2.0/build",
+  "command": "/usr/bin/clang++ -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -isystem /opt/homebrew/include -isystem /opt/homebrew/Cellar/openssl@3/3.0.7/include -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -std=c++11 -Wno-deprecated -O3 -DBOOST_ALL_NO_LIB=ON -DBOOST_NO_DUPLICATE_DEFINITIONS -std=gnu++20 -o CMakeFiles/GSG-2.0.dir/strategies.cpp.o -c /Users/antonragusa/Desktop/Projects/GSG-2.0/strategies.cpp",
+  "file": "/Users/antonragusa/Desktop/Projects/GSG-2.0/strategies.cpp"
+},
+{
+  "directory": "/Users/antonragusa/Desktop/Projects/GSG-2.0/build",
+  "command": "/usr/bin/clang++ -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -isystem /opt/homebrew/include -isystem /opt/homebrew/Cellar/openssl@3/3.0.7/include -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -std=c++11 -Wno-deprecated -O3 -DBOOST_ALL_NO_LIB=ON -DBOOST_NO_DUPLICATE_DEFINITIONS -std=gnu++20 -o CMakeFiles/GSG-2.0.dir/responseConstructor.cpp.o -c /Users/antonragusa/Desktop/Projects/GSG-2.0/responseConstructor.cpp",
+  "file": "/Users/antonragusa/Desktop/Projects/GSG-2.0/responseConstructor.cpp"
 }
 ]
