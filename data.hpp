@@ -10,7 +10,6 @@
 #include <cmath>
 #include <sstream>
 #include <string>
-#include <boost/json/src.hpp>
 
 class candlestick{
     private:
