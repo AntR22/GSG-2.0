@@ -4,7 +4,7 @@
 
 ## To Do:
 - [x] Complete backtesting structure and run
-- [ ] Restructure project into cpp and hpp files, this requires fixing boost duplicate symbols linking issue
+- [x] Restructure project into cpp and hpp files, this requires fixing boost duplicate symbols linking issue
 - [ ] Add CI/CD pipeline
 - [x] Finish volume profile
 - [ ] Make pong asynchronous 
