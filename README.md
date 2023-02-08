@@ -8,7 +8,7 @@
 - [ ] Add CI/CD pipeline
 - [x] Finish volume profile
 - [ ] Make pong asynchronous 
-- [ ] Finish time profile
+- [x] Finish time profile
 - [ ] Add trading strategies
 - [ ] Diversify indicator suite
 - [ ] Add printing trades to a log file
