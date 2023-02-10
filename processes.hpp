@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <cmath>
 
-bool argcErrorMessage (int argc);
+bool argcErrorMessage (int argc, char *argone);
 
 int checkRunSetting (char *argone);
 
@@ -27,6 +27,7 @@ class arguments {
         int strategyUsed;
         int dataPoints;
         int64_t profileSize = 0;
+        
 
         arguments (int argc, char *argv[]) {
             runSetting = checkRunSetting(argv[1]);

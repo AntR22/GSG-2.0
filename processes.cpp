@@ -9,13 +9,17 @@
 #define FIVEMIN_ONEHOUR 12
 #define ONEMIN_ONEHOUR 60
 
-bool argcErrorMessage (int argc) {
-    if (argc < 6) {
+bool argcErrorMessage (int argc, char* argone) {
+    if (checkRunSetting(argone) == 3) {
+        if (argc < 7) {
+            std::cerr << "Invalid Input\nUsage: GSG-2.0 backtest symbol time-period data-run-time strategy data-directory" << std::endl;
+            return true;
+        }
+    } else if (argc < 6) {
         std::cerr << "Invalid Input\nUsage: GSG-2.0 runSetting symbol time-period data-run-time strategy profile-size" << std::endl;
         return true;
-    } else {
-        return false;
     }
+    return false;
 }
 
 int checkRunSetting (char *argone) {

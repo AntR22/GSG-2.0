@@ -10,7 +10,7 @@
 #define DEFAULT_PRECISION 0.1
 
 int main(int argc, char *argv[]) {
-    if (argcErrorMessage(argc)) {
+    if (argcErrorMessage(argc, argv[1])) {
         return -1;
     }
 
@@ -28,7 +28,10 @@ int main(int argc, char *argv[]) {
     } else if (args.runSetting == 2) {
         liveTest(candlestickData, timeData, volumeData);
     } else if (args.runSetting == 3) {
-        backTest(candlestickData, timeData, volumeData);
+        //std::thread strategy(VWAP, std::ref(candlestickData), std::ref(timeData), std::ref(volumeData));
+        std::thread historicalData(backTest, std::ref(candlestickData), std::ref(timeData), std::ref(volumeData));
+        //strategy.join();
+        historicalData.join();
     }
 
     return 0;

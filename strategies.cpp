@@ -3,14 +3,13 @@
 
 void VWAP (cData &cS, timeProfile &tP, volumeProfile &vP) {
     double VWAPValue;
-
+    cS.returnSize();
     while (true) {
         if (cS.allCandlesClosed()) {
-            VWAPValue = basicIndicators("VWAP", cS);
+            VWAPValue = basicIndicators("VWAP", cS, 10);
             if (VWAPValue < cS.accessDataAtTime(1).getclosePrice()){
-                std::cout << "buy" << std::endl;
+                std::cout << "cS" << std::endl;
                 cS.printCandlestick(1);
-                cS.printCandlestick(0);
             }
         }
     }
