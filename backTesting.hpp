@@ -7,4 +7,4 @@ void fillCandleStick(std::string line, candlestick &data);
 
 void parseCSV(std::string &directory);
 
-int backTest ();
+void backTest (cData &cS, timeProfile &tP, volumeProfile &vP);

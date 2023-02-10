@@ -1,3 +1,4 @@
 #pragma once
+#include "data.hpp"
 
-int liveTest ();
+void liveTest (cData &cS, timeProfile &tP, volumeProfile &vP);

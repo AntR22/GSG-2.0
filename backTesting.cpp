@@ -1,4 +1,3 @@
-
 #include "data.hpp"
 #include "backTesting.hpp"
 #include <fstream>
@@ -53,10 +52,9 @@ void parseCSV(std::string &directory) {
         }
     }
 }
-
-int backTest () {
+void backTest (cData &cS, timeProfile &tP, volumeProfile &vP) {
     std::string directory = "../historicalData";
     parseCSV(directory);
-    return EXIT_SUCCESS;
+    return;
 }
 

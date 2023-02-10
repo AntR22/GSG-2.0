@@ -29,7 +29,7 @@ namespace net = boost::asio;            // from <boost/asio.hpp>
 namespace ssl = boost::asio::ssl;       // from <boost/asio/ssl.hpp>
 using tcp = boost::asio::ip::tcp; 
 
-int liveTest () {
+void liveTest (cData &cS, timeProfile &tP, volumeProfile &vP) {
         auto apiKey = "33d6fUXxSpFAeQDQ77yYMpx8Qhlop4zCj7k16En3uvkjKQnwM61EFbhUMkLcXkwr";
         auto secretKey = "Y1UBX9a38Gk38Zpx4eWigQReqahJKyIFGjpUzlqrv6PVZvPFKZGAxLSJQWnuJpB0";
         std::string host = "testnet.binance.vision";
@@ -77,7 +77,7 @@ int liveTest () {
 
         if(ec) {
             std::cerr << "Error with handshake: " << ec.message() << std::endl;
-            return EXIT_FAILURE;
+            return;
         }
        
         ws.write(boost::asio::buffer(tradeRequestObj(apiKey, "BUY", "MARKET", "1.1", secretKey)));
@@ -85,5 +85,5 @@ int liveTest () {
         ws.read(buffer);
         std::cout << boost::beast::make_printable(buffer.data()) << std::endl; 
         
-    return EXIT_SUCCESS;
+    return;
 }
