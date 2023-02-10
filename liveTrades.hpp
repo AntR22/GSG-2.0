@@ -1,6 +1,7 @@
 #pragma once
+#include "data.hpp"
 
-int marketStream();
+void marketStream(cData &cS, timeProfile &tP, volumeProfile &vP);
 
 
 
