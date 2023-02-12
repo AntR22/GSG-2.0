@@ -3,7 +3,7 @@
 #include <fstream>
 #include <chrono>
 #include <filesystem>
-#include<thread>
+#include <thread>
 
 #define ONEHOUR_ONEMONTH 672
 #define ONEMIN_ONEWEEK 10080
@@ -31,32 +31,42 @@ candlestick fillCandleStick(std::string line) {
 
 namespace fs = std::filesystem;
 
-void parseCSV(std::string &directory, cData &cS) {
+void parseCSV(const std::string &directory, cData &cS, std::mutex &m,  int &runKey) {
+    // Get the list of all .csv files in the directory
+    std::vector<fs::path> files;
     for (const auto &entry : fs::directory_iterator(directory)) {
-        if (!entry.is_directory()) {
-            continue;
-        }
-        int numFiles = 0;
-        for (const auto &file : fs::directory_iterator(entry)) {
-            numFiles++;
-        }
-        for (auto i = 1; i <= numFiles; i++) {
-            std::string path = entry.path().generic_string() + "/" + std::to_string(i) + ".csv";
-            std::ifstream fin(path);
-            std::string line;
-            int j = 0;
-            while (getline(fin, line)) {
-                cS.addCandlestick(fillCandleStick(line));
-                std::this_thread::sleep_for(std::chrono::milliseconds(100));
-            }
-            cS.printAllData();
+        if (entry.path().extension() == ".csv") {
+            files.push_back(entry.path());
         }
     }
+
+    // Sort the list of files in order
+    std::sort(files.begin(), files.end());
+    int j = 0;
+
+    // Process each .csv file in order
+    for (const auto &file : files) {
+        std::ifstream fin(file.generic_string());
+        std::string line;
+        while (getline(fin, line)) {
+            cS.addCandlestick(fillCandleStick(line));
+            if (j == 0 && cS.allCandlesClosed()) {
+                j++;
+                m.unlock();
+            }
+            std::this_thread::sleep_for(std::chrono::milliseconds(15));
+        }
+    }
+    // termiates other thread after all info has been passed in
+    std::this_thread::sleep_for(std::chrono::milliseconds(25));
+    runKey = 1;
 }
 
-void backTest (cData &cS, timeProfile &tP, volumeProfile &vP) {
-    std::string directory = "../historicalData/ETH-1h/7-11.11.22(1h)";
-    parseCSV(directory, cS);
+
+void backTest (cData &cS, timeProfile &tP, volumeProfile &vP, std::string directory, std::mutex &m, int &runKey) {
+    m.lock();
+    fs::path DIR = "../" + directory;
+    parseCSV(DIR.string(), cS, m, runKey);
     return;
 }
 
