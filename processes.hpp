@@ -1,6 +1,8 @@
 #pragma once
 #include <stdio.h>
 #include <cmath>
+#include <string>
+#include <iostream>
 
 bool argcErrorMessage (int argc, char *argone);
 
@@ -27,7 +29,7 @@ class arguments {
         int strategyUsed;
         int dataPoints;
         int64_t profileSize = 0;
-        
+        std::string testDirectory;
 
         arguments (int argc, char *argv[]) {
             runSetting = checkRunSetting(argv[1]);
@@ -36,8 +38,10 @@ class arguments {
             dataTime = checkDataTime(argv[4]);
             strategyUsed = checkStrategy(argv[5]);
             dataPoints = calculateDataPoints(timePeriod, dataTime);
-            if (argc == 7) {
+            if (argc == 7 && runSetting != 3) {
                 profileSize = checkProfileSize(argv[6]);
+            } else if (argc == 7 && runSetting == 3) {
+                testDirectory.assign(argv[6]);
             }
         }
 };
