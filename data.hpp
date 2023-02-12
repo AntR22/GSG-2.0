@@ -168,10 +168,12 @@ class cData {
             delete[] cp;
         }
         void addCandlestick(std::string s) {
-            cp[startIndex] = createCandlestickObject(s);
-            if (cp[startIndex].getClosed()) {
-                startIndex++;
+            candlestick c = createCandlestickObject(s);
+            if (!c.getClosed()) {
+                return;
             }
+            cp[startIndex] = c;
+            startIndex++;
             checkStartIndex();
         }
         void addCandlestick(candlestick candle) {
